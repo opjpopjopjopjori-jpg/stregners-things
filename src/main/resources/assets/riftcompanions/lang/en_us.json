@@ -1,0 +1,14 @@
+{
+  "entity.riftcompanions.seer": "Seer",
+  "entity.riftcompanions.guardian": "Guardian",
+  "entity.riftcompanions.gifted": "Gifted",
+  "entity.riftcompanions.scout": "Scout",
+  "message.riftcompanions.state_changed": "%s is now %s",
+  "message.riftcompanions.status": "%s — state: %s | energy: %s | reason: %s",
+  "key.categories.riftcompanions": "Rift Companions",
+  "key.riftcompanions.command_wheel": "Open Companion Command Wheel",
+  "key.riftcompanions.team_journal": "Open Team Journal",
+  "key.riftcompanions.quick_recall": "Quick Safe Recall",
+  "key.riftcompanions.quick_status": "Open Companion Diagnostics",
+  "key.riftcompanions.toggle_developer_overlay": "Toggle Companion Developer Overlay"
+}

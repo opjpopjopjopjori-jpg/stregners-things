@@ -1,0 +1,22 @@
+# Gradle and Forge generated state
+.gradle/
+build/
+run/
+run-data/
+mcmodsrepo/
+
+# IDE output
+.idea/
+*.iml
+out/
+
+# Generated resources and logs
+src/generated/
+logs/
+*.log
+hs_err_pid*.log
+*.hprof
+
+# Operating system files
+.DS_Store
+Thumbs.db

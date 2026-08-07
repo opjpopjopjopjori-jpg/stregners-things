@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "content_scope": "private_personal_presentation",
+  "core_ids": {
+    "seer": "observer_companion",
+    "guardian": "guardian_companion",
+    "gifted": "gifted_companion",
+    "scout": "scout_companion"
+  },
+  "display_profiles": {
+    "seer": { "display_name": "Will / Seer", "texture": "textures/entity/personal/will_seer.png" },
+    "guardian": { "display_name": "Hopper / Guardian", "texture": "textures/entity/personal/hopper_sheriff.png" },
+    "gifted": { "display_name": "Eleven / Gifted", "texture": "textures/entity/personal/eleven_gifted.png" },
+    "scout": { "display_name": "Max / Scout", "texture": "textures/entity/personal/max_scout.png" }
+  },
+  "public_release_note": "Replace display names, profiles, textures and any fan-inspired content with original content before public distribution."
+}

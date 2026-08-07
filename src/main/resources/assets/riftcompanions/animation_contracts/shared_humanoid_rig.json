@@ -1,0 +1,419 @@
+{
+  "schema_version": 4,
+  "rig_id": "shared_humanoid_v2",
+  "coordinate_space": "Blockbench model units",
+  "legacy_bridge_bones": [
+    "body",
+    "left_arm",
+    "right_arm",
+    "left_leg",
+    "right_leg"
+  ],
+  "bones": [
+    {
+      "name": "root",
+      "parent": null,
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "rotation_min": [
+        -5,
+        -8,
+        -5
+      ],
+      "rotation_max": [
+        5,
+        8,
+        5
+      ],
+      "locked_axes": [
+        "translation"
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "root",
+      "pivot": [
+        0,
+        12,
+        0
+      ],
+      "rotation_min": [
+        -18,
+        -25,
+        -12
+      ],
+      "rotation_max": [
+        18,
+        25,
+        12
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "chest",
+      "parent": "body",
+      "pivot": [
+        0,
+        20,
+        0
+      ],
+      "rotation_min": [
+        -20,
+        -20,
+        -12
+      ],
+      "rotation_max": [
+        20,
+        20,
+        12
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "head",
+      "parent": "chest",
+      "pivot": [
+        0,
+        24,
+        0
+      ],
+      "rotation_min": [
+        -35,
+        -55,
+        -25
+      ],
+      "rotation_max": [
+        35,
+        55,
+        25
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "jaw",
+      "parent": "head",
+      "pivot": [
+        0,
+        24,
+        -4
+      ],
+      "rotation_min": [
+        0,
+        -5,
+        -5
+      ],
+      "rotation_max": [
+        25,
+        5,
+        5
+      ],
+      "locked_axes": [
+        "y_translation",
+        "z_translation"
+      ]
+    },
+    {
+      "name": "left_arm_upper",
+      "parent": "left_arm",
+      "pivot": [
+        5,
+        22,
+        0
+      ],
+      "rotation_min": [
+        -115,
+        -65,
+        -75
+      ],
+      "rotation_max": [
+        75,
+        65,
+        75
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "left_arm_lower",
+      "parent": "left_arm_upper",
+      "pivot": [
+        5,
+        16,
+        0
+      ],
+      "rotation_min": [
+        -10,
+        -20,
+        -15
+      ],
+      "rotation_max": [
+        125,
+        20,
+        15
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "left_hand",
+      "parent": "left_arm_lower",
+      "pivot": [
+        5,
+        12,
+        0
+      ],
+      "rotation_min": [
+        -30,
+        -30,
+        -30
+      ],
+      "rotation_max": [
+        30,
+        30,
+        30
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "right_arm_upper",
+      "parent": "right_arm",
+      "pivot": [
+        -5,
+        22,
+        0
+      ],
+      "rotation_min": [
+        -115,
+        -65,
+        -75
+      ],
+      "rotation_max": [
+        75,
+        65,
+        75
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "right_arm_lower",
+      "parent": "right_arm_upper",
+      "pivot": [
+        -5,
+        16,
+        0
+      ],
+      "rotation_min": [
+        -10,
+        -20,
+        -15
+      ],
+      "rotation_max": [
+        125,
+        20,
+        15
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "right_hand",
+      "parent": "right_arm_lower",
+      "pivot": [
+        -5,
+        12,
+        0
+      ],
+      "rotation_min": [
+        -30,
+        -30,
+        -30
+      ],
+      "rotation_max": [
+        30,
+        30,
+        30
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "left_leg_upper",
+      "parent": "left_leg",
+      "pivot": [
+        2,
+        12,
+        0
+      ],
+      "rotation_min": [
+        -70,
+        -25,
+        -18
+      ],
+      "rotation_max": [
+        70,
+        25,
+        18
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "left_leg_lower",
+      "parent": "left_leg_upper",
+      "pivot": [
+        2,
+        6,
+        0
+      ],
+      "rotation_min": [
+        -8,
+        -12,
+        -10
+      ],
+      "rotation_max": [
+        115,
+        12,
+        10
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "left_foot",
+      "parent": "left_leg_lower",
+      "pivot": [
+        2,
+        0,
+        -0.5
+      ],
+      "rotation_min": [
+        -25,
+        -15,
+        -15
+      ],
+      "rotation_max": [
+        35,
+        15,
+        15
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "right_leg_upper",
+      "parent": "right_leg",
+      "pivot": [
+        -2,
+        12,
+        0
+      ],
+      "rotation_min": [
+        -70,
+        -25,
+        -18
+      ],
+      "rotation_max": [
+        70,
+        25,
+        18
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "right_leg_lower",
+      "parent": "right_leg_upper",
+      "pivot": [
+        -2,
+        6,
+        0
+      ],
+      "rotation_min": [
+        -8,
+        -12,
+        -10
+      ],
+      "rotation_max": [
+        115,
+        12,
+        10
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "right_foot",
+      "parent": "right_leg_lower",
+      "pivot": [
+        -2,
+        0,
+        -0.5
+      ],
+      "rotation_min": [
+        -25,
+        -15,
+        -15
+      ],
+      "rotation_max": [
+        35,
+        15,
+        15
+      ],
+      "locked_axes": []
+    },
+    {
+      "name": "accessory_1",
+      "parent": "head",
+      "pivot": [
+        0,
+        24,
+        0
+      ],
+      "rotation_min": [
+        -35,
+        -55,
+        -25
+      ],
+      "rotation_max": [
+        35,
+        55,
+        25
+      ],
+      "locked_axes": [
+        "scale"
+      ]
+    },
+    {
+      "name": "accessory_2",
+      "parent": "chest",
+      "pivot": [
+        0,
+        20,
+        0
+      ],
+      "rotation_min": [
+        -20,
+        -20,
+        -12
+      ],
+      "rotation_max": [
+        20,
+        20,
+        12
+      ],
+      "locked_axes": [
+        "scale"
+      ]
+    }
+  ],
+  "invariants": [
+    "Hitbox never follows animation bone transforms.",
+    "Accessory bones do not decide gameplay state.",
+    "Large scale animation is prohibited because it can create visual clipping.",
+    "Legacy bridge bones exist only for backward-compatible clips and are not new authoring targets.",
+    "New clips target canonical bones and keep movement within the declared constraints."
+  ],
+  "visual_extension_contract": "faceted_character_512_v2",
+  "visual_extension_rules": [
+    "Role-prefixed visual bones must parent to canonical animation-safe bones.",
+    "Faceted head, eye, lid, brow, jaw, mouth, hair, and clothing bones are presentation-only.",
+    "Authored eye movement is local presentation only; it never tracks players, scans terrain, or grants perception.",
+    "All role/profile texture atlases use the shared 512px UV scale.",
+    "Visual bones must remain bounded within declared visible bounds and preserve canonical pivots.",
+    "Hitbox, collision, damage, gameplay authority, and player input never follow visual bone transforms."
+  ]
+}

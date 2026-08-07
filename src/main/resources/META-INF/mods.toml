@@ -1,0 +1,39 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved — private/personal content pack until original public assets are substituted"
+issueTrackerURL=""
+
+[[mods]]
+modId="riftcompanions"
+version="${file.jarVersion}"
+displayName="Rift Companions"
+displayURL=""
+logoFile=""
+authors="Project owner"
+description='''
+Offline/singleplayer companion framework for Minecraft Forge 1.20.1.
+The source tree separates original gameplay roles from a private personal presentation layer.
+'''
+
+[[dependencies.riftcompanions]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.riftcompanions]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
+
+# Required when the user later creates the build setup. GeckoLib is used only
+# for model rendering/animation; the authoritative AI does not depend on it.
+[[dependencies.riftcompanions]]
+modId="geckolib"
+mandatory=true
+versionRange="[4,)"
+ordering="AFTER"
+side="BOTH"

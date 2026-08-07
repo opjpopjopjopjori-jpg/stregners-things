@@ -1,0 +1,37 @@
+{
+  "hive_notice": {"sounds": [{"name": "riftcompanions:hive/notice", "stream": false}]},
+  "hive_focus": {"sounds": [{"name": "riftcompanions:hive/focus", "stream": false}]},
+  "hive_release": {"sounds": [{"name": "riftcompanions:hive/release", "stream": false}]},
+  "hive_resist": {"sounds": [{"name": "riftcompanions:hive/resist", "stream": false}]},
+  "hive_recovery": {"sounds": [{"name": "riftcompanions:hive/recovery", "stream": false}]},
+
+  "guardian_guard_signal": {"sounds": [{"name": "riftcompanions:companions/guardian_guard_signal", "stream": false}]},
+  "guardian_melee_swing": {"sounds": [{"name": "riftcompanions:companions/guardian_melee_swing", "stream": false}]},
+  "guardian_impact": {"sounds": [{"name": "riftcompanions:companions/guardian_impact", "stream": false}]},
+  "guardian_retreat": {"sounds": [{"name": "riftcompanions:companions/guardian_retreat", "stream": false}]},
+
+  "seer_notice": {"sounds": [{"name": "riftcompanions:companions/seer_notice", "stream": false}]},
+  "seer_focus": {"sounds": [{"name": "riftcompanions:companions/seer_focus", "stream": false}]},
+  "seer_release": {"sounds": [{"name": "riftcompanions:companions/seer_release", "stream": false}]},
+  "seer_shatter": {"sounds": [{"name": "riftcompanions:companions/seer_shatter", "stream": false}]},
+  "seer_recovery": {"sounds": [{"name": "riftcompanions:companions/seer_recovery", "stream": false}]},
+
+  "gifted_notice": {"sounds": [{"name": "riftcompanions:companions/gifted_notice", "stream": false}]},
+  "gifted_focus": {"sounds": [{"name": "riftcompanions:companions/gifted_focus", "stream": false}]},
+  "gifted_push": {"sounds": [{"name": "riftcompanions:companions/gifted_push", "stream": false}]},
+  "gifted_shield": {"sounds": [{"name": "riftcompanions:companions/gifted_shield", "stream": false}]},
+  "gifted_rescue": {"sounds": [{"name": "riftcompanions:companions/gifted_rescue", "stream": false}]},
+  "gifted_exhausted": {"sounds": [{"name": "riftcompanions:companions/gifted_exhausted", "stream": false}]},
+
+  "scout_route": {"sounds": [{"name": "riftcompanions:companions/scout_route", "stream": false}]},
+  "scout_anchor": {"sounds": [{"name": "riftcompanions:companions/scout_anchor", "stream": false}]},
+  "scout_dodge": {"sounds": [{"name": "riftcompanions:companions/scout_dodge", "stream": false}]},
+
+  "ui_plan_accept": {"sounds": [{"name": "riftcompanions:ui/plan_accept", "stream": false}]},
+  "ui_safe_mode": {"sounds": [{"name": "riftcompanions:ui/safe_mode", "stream": false}]},
+
+  "ambience_guardian_base": {"sounds": [{"name": "riftcompanions:ambience/guardian_base", "stream": true}]},
+  "ambience_seer_signal": {"sounds": [{"name": "riftcompanions:ambience/seer_signal", "stream": true}]},
+  "ambience_gifted_calm": {"sounds": [{"name": "riftcompanions:ambience/gifted_calm", "stream": true}]},
+  "ambience_scout_lookout": {"sounds": [{"name": "riftcompanions:ambience/scout_lookout", "stream": true}]}
+}
