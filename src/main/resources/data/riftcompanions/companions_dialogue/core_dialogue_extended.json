@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {"id":"dlg_ice_dragon_01","role":"seer","trigger":"dragon_ice","text":"The ice dragon spreads its wings — frost breath freezes the air instantly.","priority":2,"cooldown_ticks":2400},
+    {"id":"dlg_ice_dragon_02","role":"guardian","trigger":"dragon_ice","text":"What exactly is happening?","priority":2,"cooldown_ticks":2400},
+    {"id":"dlg_ice_dragon_03","role":"seer","trigger":"dragon_ice","text":"The reason is clear — frost breath kills instantly. Arrows from concealment only.","priority":1,"cooldown_ticks":3600},
+    {"id":"dlg_fire_forest_01","role":"seer","trigger":"biome_fire_forest","text":"Ember trees glow with inner fire — every leaf crackles with heat.","priority":3,"cooldown_ticks":1800},
+    {"id":"dlg_fire_forest_02","role":"scout","trigger":"biome_fire_forest","text":"Scout: A fire-proof stone structure lies ahead — safe shelter confirmed.","priority":3,"cooldown_ticks":1800},
+    {"id":"dlg_blizzard_01","role":"seer","trigger":"blizzard","text":"Blizzard conditions — visibility drops to nothing; structures vanish.","priority":1,"cooldown_ticks":3000},
+    {"id":"dlg_nether_01","role":"seer","trigger":"dimension_nether","text":"The Nether dimension — fire everywhere, no safe structures from vanilla.","priority":2,"cooldown_ticks":2400},
+    {"id":"dlg_nether_02","role":"gifted","trigger":"dimension_nether","text":"Gifted: Shield must remain active — magical fire requires magical defense.","priority":2,"cooldown_ticks":2400},
+    {"id":"dlg_ch05_01","role":"seer","trigger":"chapter_05","text":"All chapters complete — the team has survived together.","priority":4,"cooldown_ticks":600},
+    {"id":"dlg_ch05_02","role":"guardian","trigger":"chapter_05","text":"Every combat plan executed with zero unnecessary risk.","priority":4,"cooldown_ticks":600},
+    {"id":"dlg_ch05_03","role":"gifted","trigger":"chapter_05","text":"All abilities used only when protected-boundary checks passed.","priority":4,"cooldown_ticks":600},
+    {"id":"dlg_ch05_04","role":"scout","trigger":"chapter_05","text":"All routes and structures documented for future reference.","priority":4,"cooldown_ticks":600},
+    {"id":"dlg_ch05_05","role":"seer","trigger":"chapter_05","text":"The story is complete. Professional. Intelligent. Zero omissions.","priority":4,"cooldown_ticks":1200}
+  ]
+}

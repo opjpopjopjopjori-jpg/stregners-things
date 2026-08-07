@@ -1,0 +1,19 @@
+{
+  "id":"784A70C90F6F5A49",
+  "title":"Stregner Five Chapters",
+  "subtitle":"AI-compatible sequential quest framework — FTB Quests",
+  "description":["Chapter 1: Gather food and scout.","Chapter 2: Find village or search structure.","Chapter 3: Kill 10 zombies; agree tactics.","Chapter 4: Collect armor and food.","Chapter 5: Command activates complete story."],
+  "group":"stregner_story",
+  "icon":"minecraft:diamond",
+  "filename":"784A70C90F6F5A49",
+  "x":0,"y":0,
+  "dependencies":[],
+  "hidden":false,
+  "quests":{
+    "CH01":{"id":"CH01","title":"Chapter 1 — Gathering","dependencies":[],"tasks":{"t1":{"type":"item","item":{"id":"minecraft:bread","count":10},"consume_items":false},"t2":{"type":"checkmark"}},"rewards":[{"type":"item","item":{"id":"minecraft:diamond","count":1}}]},
+    "CH02":{"id":"CH02","title":"Chapter 2 — Discovery","dependencies":["CH01"],"tasks":{"t1":{"type":"location","dimension":"minecraft:overworld","radius":500},"t2":{"type":"structure","structure":"minecraft:village"}},"rewards":[{"type":"xp","amount":250}]},
+    "CH03":{"id":"CH03","title":"Chapter 3 — Combat","dependencies":["CH02"],"tasks":{"t1":{"type":"kill","entity":"minecraft:zombie","value":10},"t2":{"type":"checkmark","label":"Arrow and concealment plan agreed"}},"rewards":[{"type":"command","command":"/say Chapter 3 complete"}]},
+    "CH04":{"id":"CH04","title":"Chapter 4 — Armor Collection","dependencies":["CH03"],"tasks":{"t1":{"type":"item","item":{"id":"minecraft:diamond_chestplate","count":1},"consume_items":false},"t2":{"type":"item","item":{"id":"minecraft:cooked_beef","count":8},"consume_items":false}},"rewards":[{"type":"xp","amount":500}]},
+    "CH05":{"id":"CH05","title":"Chapter 5 — Conclusion","dependencies":["CH04"],"tasks":{"t1":{"type":"checkmark","label":"Story activated via /stregners story activate"}},"rewards":[{"type":"item","item":{"id":"minecraft:nether_star","count":1}}]}
+  }
+}
