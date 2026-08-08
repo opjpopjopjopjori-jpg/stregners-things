@@ -362,6 +362,9 @@ public abstract class CompanionEntity extends Mob implements GeoEntity {
             // CompanionMeleeGoal owns movement toward the confirmed target. A
             // formation path must never overwrite it and make combat look frozen.
             if (hasActiveCombatTarget()) {
+                // Role-specific combat intelligence: each companion performs
+                // their unique tactical role instead of just standing still.
+                tickCombatRole(owner, now);
                 return;
             }
             this.setTarget(null);
@@ -375,6 +378,8 @@ public abstract class CompanionEntity extends Mob implements GeoEntity {
             this.getNavigation().stop();
             return;
         }
+        // In IDLE/OBSERVING state with no active combat target:
+        // Only follow if owner is far; otherwise hold position for potential threats
         if (distanceToSqr(owner) > 14.0D * 14.0D) {
             setCompanionState(CompanionState.FOLLOWING, "OWNER_MOVED_AWAY");
             tickFollow(owner, now);
@@ -437,6 +442,124 @@ public abstract class CompanionEntity extends Mob implements GeoEntity {
         requestPath(BlockPos.containing(guardPoint), movementSpeedForState() + 0.03D, now);
         this.setTarget(threat);
         beginVisualAction(CompanionAction.GUARD, 24);
+    }
+
+    /**
+     * Role-specific combat intelligence. Each companion has a unique tactical
+     * role during combat instead of just passively following the player:
+     * <ul>
+     *   <li><b>Guardian (Hopper)</b>: Lures mobs AWAY from the player/Eleven.
+     *       Moves to intercept threats between them and the owner, then taunts
+     *       to pull aggro. If a mob is targeting the owner, Hopper steps into
+     *       its path and attacks, creating space for Eleven to use powers.</li>
+     *   <li><b>Gifted (Eleven)</b>: Stays at range from the melee target,
+     *       maintaining optimal distance for telekinetic push/shield. Retreats
+     *       if the target gets within 3 blocks, advances if beyond 8 blocks.</li>
+     *   <li><b>Scout (Max)</b>: Flanks the target — circles to the side to
+     *       create cross-fire pressure and spot escape routes. Uses speed to
+     *       harass from angles the Guardian can't cover.</li>
+     *   <li><b>Seer (Will)</b>: Holds position near the owner to maintain
+     *       hive sense range. Prioritizes anomaly detection and will redirect
+     *       or disrupt hive-linked threats from safety.</li>
+     * </ul>
+     */
+    private void tickCombatRole(final ServerPlayer owner, final long now) {
+        final LivingEntity target = getTarget();
+        if (target == null || !target.isAlive()) return;
+
+        switch (this.role) {
+            case GUARDIAN -> tickGuardianCombatRole(owner, target, now);
+            case GIFTED   -> tickGiftedCombatRole(owner, target, now);
+            case SCOUT     -> tickScoutCombatRole(owner, target, now);
+            case SEER      -> tickSeerCombatRole(owner, target, now);
+        }
+    }
+
+    /**
+     * Hopper's Guardian combat role: INTERCEPT and LURE.
+     * He positions himself between the threat and the owner, then attacks.
+     * If a mob is targeting the owner, Hopper actively moves to intercept
+     * its path — pulling aggro away from Eleven and creating tactical space.
+     */
+    private void tickGuardianCombatRole(final ServerPlayer owner, final LivingEntity target, final long now) {
+        // If the target is heading toward the owner, intercept between them
+        final double distToOwner = distanceToSqr(owner);
+        final double distTargetToOwner = target.distanceToSqr(owner);
+
+        if (distTargetToOwner < distToOwner) {
+            // Target is closer to owner than we are — move to intercept
+            final Vec3 interceptPoint = owner.position().add(
+                    target.position().subtract(owner.position()).normalize().scale(2.5D));
+            requestPath(BlockPos.containing(interceptPoint), movementSpeedForState() + 0.04D, now);
+            // Taunt: force the target to look at us by attacking
+            if (distanceToSqr(target) <= (getBbWidth() * 2.0D + target.getBbWidth()) * (getBbWidth() * 2.0D + target.getBbWidth())) {
+                // Already in melee range — CompanionMeleeGoal handles the attack
+            } else if (distanceToSqr(target) < 6.0D * 6.0D) {
+                // Close enough to close in fast
+                getNavigation().moveTo(target, movementSpeedForState() + 0.06D);
+            }
+        } else {
+            // We're between the target and owner — hold position, melee goal handles combat
+        }
+    }
+
+    /**
+     * Eleven's Gifted combat role: RANGE CONTROL.
+     * She maintains 5-8 blocks distance from the target for optimal push/shield.
+     * Retreats if the target gets too close, advances if too far.
+     */
+    private void tickGiftedCombatRole(final ServerPlayer owner, final LivingEntity target, final long now) {
+        final double distSq = distanceToSqr(target);
+        final double minRange = 5.0D;
+        final double maxRange = 8.0D;
+
+        if (distSq < minRange * minRange) {
+            // Too close! Retreat away from target, toward owner if possible
+            final Vec3 retreatDir = position().subtract(target.position()).normalize();
+            final Vec3 retreatPoint = position().add(retreatDir.scale(3.0D));
+            requestPath(BlockPos.containing(retreatPoint), movementSpeedForState() + 0.06D, now);
+        } else if (distSq > maxRange * maxRange) {
+            // Too far, advance toward target to get into push range
+            getNavigation().moveTo(target, movementSpeedForState());
+        }
+        // In optimal range — stay put, let melee goal or powers handle it
+    }
+
+    /**
+     * Max's Scout combat role: FLANKING.
+     * She circles to the side of the target (perpendicular to the owner-target line)
+     * to create cross-pressure and spot escape routes.
+     */
+    private void tickScoutCombatRole(final ServerPlayer owner, final LivingEntity target, final long now) {
+        // Flank to the right side of the target (relative to owner→target line)
+        final Vec3 ownerToTarget = target.position().subtract(owner.position());
+        if (ownerToTarget.lengthSqr() < 0.01D) return;
+        // Perpendicular direction (right flank)
+        final Vec3 flankDir = new Vec3(-ownerToTarget.z, 0, ownerToTarget.x).normalize();
+        final Vec3 flankPoint = target.position().add(flankDir.scale(4.0D));
+        final double distSq = distanceToSqr(flankPoint);
+        if (distSq > 2.25D) {
+            requestPath(BlockPos.containing(flankPoint), movementSpeedForState() + 0.03D, now);
+        }
+    }
+
+    /**
+     * Will's Seer combat role: HOLD and SENSE.
+     * He stays near the owner (within 4 blocks) to maintain hive sense range,
+     * prioritizing anomaly detection and hive disruption from safety.
+     */
+    private void tickSeerCombatRole(final ServerPlayer owner, final LivingEntity target, final long now) {
+        // Stay near owner for hive sense range
+        if (distanceToSqr(owner) > 4.0D * 4.0D) {
+            requestPath(owner.blockPosition(), movementSpeedForState(), now);
+        }
+        // Will's combat contribution is via powers (disrupt/redirect/shatter),
+        // not melee. If the target gets too close, retreat.
+        if (distanceToSqr(target) < 3.0D * 3.0D) {
+            final Vec3 retreatDir = position().subtract(target.position()).normalize();
+            requestPath(BlockPos.containing(position().add(retreatDir.scale(2.0D))),
+                    movementSpeedForState() + 0.04D, now);
+        }
     }
 
     private void tickRetreat(final ServerPlayer owner, final long now) {

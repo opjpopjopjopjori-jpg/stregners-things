@@ -280,8 +280,9 @@ public final class AbilityService {
             return AbilityResult.failure("GIFTED_ENERGY_LOW");
         }
         final ServerLevel level = owner.serverLevel();
-        final List<Monster> targets = level.getEntitiesOfClass(Monster.class, gifted.getBoundingBox().inflate(6.0D),
-                target -> !target.getType().is(ModTags.PROTECTED_FROM_COMPANIONS))
+        final List<Monster> targets = level.getEntitiesOfClass(Monster.class, gifted.getBoundingBox().inflate(32.0D),
+                target -> !target.getType().is(ModTags.PROTECTED_FROM_COMPANIONS)
+                        && gifted.hasLineOfSight(target))
                 .stream().sorted(Comparator.comparingDouble(gifted::distanceToSqr)).limit(5).toList();
         if (targets.isEmpty()) {
             return AbilityResult.failure("NO_SAFE_PUSH_TARGET");
@@ -309,9 +310,17 @@ public final class AbilityService {
                 impulse = target.position().subtract(gifted.position());
             }
             final float pushMultiplier = com.riftcompanions.combat.EncounterAdapterRegistry.profileFor(target).pushMultiplier();
-            impulse = impulse.normalize().scale(0.85D * pushMultiplier).add(0.0D, 0.20D * pushMultiplier, 0.0D);
+            // Telekinetic impulse: strong upward launch (3.2 blocks height) + horizontal throw (2.4 blocks)
+            // This lets Eleven lift mobs high, throw them, and break their fall on landing.
+            final double horizontalStrength = 2.4D * pushMultiplier;
+            final double verticalStrength = 3.2D * pushMultiplier;
+            impulse = impulse.normalize().scale(horizontalStrength).add(0.0D, verticalStrength, 0.0D);
             // Entity#push marks/synchronizes velocity through vanilla's normal path.
-            if (pushMultiplier > 0.0F) target.push(impulse.x, impulse.y, impulse.z);
+            if (pushMultiplier > 0.0F) {
+                target.push(impulse.x, impulse.y, impulse.z);
+                // Reset fall distance so the mob takes full fall damage on landing
+                target.resetFallDistance();
+            }
             level.sendParticles(ParticleTypes.ELECTRIC_SPARK, target.getX(), target.getY() + 0.5D, target.getZ(), effectCount(5), 0.20D, 0.35D, 0.20D, 0.02D);
         }
         DialogueService.get().speak(gifted, "push_success", 1);
@@ -319,7 +328,7 @@ public final class AbilityService {
     }
 
     private static AbilityResult castGiftedShield(final ServerPlayer owner, final CompanionEntity gifted) {
-        if (gifted.distanceToSqr(owner) > 12.0D * 12.0D) {
+        if (gifted.distanceToSqr(owner) > 32.0D * 32.0D) {
             return AbilityResult.failure("SHIELD_TARGET_OUT_OF_RANGE");
         }
         final ServerLevel level = owner.serverLevel();
