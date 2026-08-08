@@ -1,20 +1,18 @@
-# 512×512 Faceted Character UV Layout
+# 512×512 HD Player Skin UV Layout
 
-The eight companion atlases are technical **512×512 RGBA** sheets for four personal and four public faceted-character models. A PNG remains rectangular by definition, but the visible character is not a flat square skin: face planes, eyes, lids, brows, mouth, hair locks, body segments, and clothing layers are independent Geo cuboids.
+The companion atlases are **512×512 RGBA** textures using an 8x upscaled standard Minecraft player skin UV layout, plus dedicated 3D hair and 3D eye extension sheets.
 
-## Material islands
+## UV Mapping
 
-| Group | Purpose |
-|---|---|
-| `head_*` | Abstract non-portrait skin planes for tapered faceted heads |
-| `skin_tile`, `hair_tile` | Face, ears, nose, hair locks, brows, and lids |
-| `eye_tile`, `accent_tile`, `thread_tile` | Separate whites, iris, pupil, catchlight, and mouth components |
-| `jacket`, `shirt`, `field`, `cloth`, `weather` | Ordinary late-1980s clothing layers and role palettes |
-| `pants`, `leather`, `boot`, `metal` | Articulated lower body, shoes, watch, belt, and hardware |
+| Region | UV Range (512x512) | Purpose |
+|---|---|---|
+| Player Skin Base | `[0, 0]` to `[512, 256]` | Standard 8x upscaled Minecraft player skin (Head, Body, Arms, Legs) |
+| Player Skin Overlays | Standard Overlay UVs | Jacket, hat/hair layer, sleeves, and pants overlays |
+| 3D Hair Sheet | `[0, 256]` to `[128, 384]` | Dedicated high-definition realistic 3D hair strands and highlights |
+| 3D Eye & Brow Sheet | `[256, 256]` to `[320, 384]` | Dedicated realistic 3D eye whites, irises, pupils, glints, eyelids, and eyebrows |
 
 ## Editing boundary
 
 - Preserve `512×512`, RGBA, lossless PNG output.
-- Keep all UV regions inside `tools/generate_gecko_assets.py` bounds.
-- Do not paint a copied face or exact costume onto `head_*` panels.
-- Keep the eye and hair material islands distinct because their Geo bones animate independently.
+- Keep standard Minecraft player skin UV coordinates for base body and overlays.
+- 3D hair volume and 3D eye/brow cuboids in Geo models sample from the dedicated extension sheets.
