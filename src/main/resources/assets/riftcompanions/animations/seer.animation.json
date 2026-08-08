@@ -4826,7 +4826,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_point": {
       "animation_length": 0.78,
@@ -4874,7 +4875,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_reassure": {
       "animation_length": 1.05,
@@ -4927,7 +4929,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_gear_check": {
       "animation_length": 1.2,
@@ -4994,7 +4997,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_observe": {
       "animation_length": 1.4,
@@ -5056,7 +5060,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_campfire": {
       "animation_length": 1.55,
@@ -5104,7 +5109,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_weather": {
       "animation_length": 1.1,
@@ -5147,7 +5153,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_horizon": {
       "animation_length": 1.0,
@@ -5214,7 +5221,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_base": {
       "animation_length": 1.45,
@@ -5281,7 +5289,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_work": {
       "animation_length": 1.08,
@@ -5334,7 +5343,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_calm": {
       "animation_length": 1.65,
@@ -5396,7 +5406,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_trace_signal": {
       "animation_length": 1.12,
@@ -5463,7 +5474,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_reflect": {
       "animation_length": 1.45,
@@ -5525,7 +5537,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_cave": {
       "animation_length": 1.18,
@@ -5587,7 +5600,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_village": {
       "animation_length": 1.08,
@@ -5654,7 +5668,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.social_travel": {
       "animation_length": 1.12,
@@ -5721,7 +5736,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.seer.context_animal_greet": {
       "animation_length": 1.18,

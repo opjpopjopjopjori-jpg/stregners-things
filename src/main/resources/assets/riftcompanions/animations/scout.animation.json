@@ -4190,7 +4190,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_point": {
       "animation_length": 0.78,
@@ -4238,7 +4239,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_reassure": {
       "animation_length": 1.05,
@@ -4291,7 +4293,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_gear_check": {
       "animation_length": 1.2,
@@ -4358,7 +4361,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_observe": {
       "animation_length": 1.4,
@@ -4420,7 +4424,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_campfire": {
       "animation_length": 1.55,
@@ -4468,7 +4473,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_weather": {
       "animation_length": 1.1,
@@ -4511,7 +4517,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_horizon": {
       "animation_length": 1.0,
@@ -4578,7 +4585,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_base": {
       "animation_length": 1.45,
@@ -4645,7 +4653,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_work": {
       "animation_length": 1.08,
@@ -4698,7 +4707,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_calm": {
       "animation_length": 1.65,
@@ -4760,7 +4770,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_map_read": {
       "animation_length": 1.2,
@@ -4803,7 +4814,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_route_confirm": {
       "animation_length": 0.86,
@@ -4870,7 +4882,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_cave": {
       "animation_length": 1.18,
@@ -4932,7 +4945,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_village": {
       "animation_length": 1.08,
@@ -4999,7 +5013,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.social_travel": {
       "animation_length": 1.12,
@@ -5066,7 +5081,8 @@
             ]
           }
         }
-      }
+      },
+      "loop": "hold"
     },
     "animation.scout.context_animal_greet": {
       "animation_length": 1.18,
