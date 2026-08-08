@@ -72,6 +72,7 @@ public final class CompanionPresentationSoundService {
             case SEER_FOCUS -> cue(ModSounds.SEER_FOCUS, 0.34F, 0.98F, 36L);
             case SEER_RELEASE, SEER_RELEASE_REDIRECT -> cue(ModSounds.SEER_RELEASE, 0.58F, 1.00F, 12L);
             case SEER_RELEASE_SHATTER -> cue(ModSounds.SEER_SHATTER, 0.62F, 0.94F, 16L);
+            case SEER_DANGER_MODE -> cue(ModSounds.SEER_DANGER_MODE, 0.70F, 1.00F, 40L);
             case RECOVER -> cue(ModSounds.SEER_RECOVERY, 0.34F, 0.96F, 20L);
             case GIFTED_NOTICE -> cue(ModSounds.GIFTED_NOTICE, 0.46F, 1.00F, 16L);
             case GIFTED_FOCUS -> cue(ModSounds.GIFTED_FOCUS, 0.34F, 1.00F, 36L);

@@ -1014,7 +1014,8 @@ public abstract class CompanionEntity extends Mob implements GeoEntity {
     public CompanionVisualState getVisualState() {
         if (getCompanionState() == CompanionState.DOWNED) return CompanionVisualState.DOWNED;
         final CompanionAction action = getVisualAction();
-        if (action == CompanionAction.SEER_FOCUS || action == CompanionAction.GIFTED_FOCUS || action == CompanionAction.GIFTED_SHIELD
+        if (action == CompanionAction.SEER_FOCUS || action == CompanionAction.SEER_DANGER_MODE
+                || action == CompanionAction.GIFTED_FOCUS || action == CompanionAction.GIFTED_SHIELD
                 || action == CompanionAction.GUARDIAN_BRACE) {
             return CompanionVisualState.POWER_FOCUS;
         }
