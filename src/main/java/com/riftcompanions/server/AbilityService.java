@@ -209,13 +209,14 @@ public final class AbilityService {
     }
 
     /**
-     * Temporary single-target disruption for any eligible hostile Mob. The
-     * same heart-budget and boss-resistance model as Will's channel powers
-     * determines cost and duration; it never grants pet ownership or loot.
+     * Temporary single-target disruption for any eligible hostile Mob.
+     * Will can disrupt even without active combat. In danger context (mob is
+     * attacking owner, or owner is low health), duration is doubled and even
+     * resistant bosses can be disrupted for >10 seconds.
      */
     private static AbilityResult castSeerDisrupt(final ServerPlayer owner, final CompanionEntity seer) {
         final List<net.minecraft.world.entity.Mob> candidates = owner.level().getEntitiesOfClass(net.minecraft.world.entity.Mob.class,
-                seer.getBoundingBox().inflate(32.0D), target -> com.riftcompanions.hive.control.WillControlEligibility.isActiveThreat(owner, target)
+                seer.getBoundingBox().inflate(32.0D), target -> com.riftcompanions.hive.control.WillControlEligibility.isNearbyThreat(owner, target)
                         && seer.hasLineOfSight(target) && owner.serverLevel().hasChunkAt(target.blockPosition()))
                 .stream().sorted(Comparator.comparingDouble(seer::distanceToSqr)).toList();
         final com.riftcompanions.hive.control.WillControlBudget.Selection selection =
@@ -226,9 +227,6 @@ public final class AbilityService {
         }
         final com.riftcompanions.hive.control.WillControlBudget.ControlTarget selected = selection.targets().get(0);
         final net.minecraft.world.entity.Mob target = selected.target();
-        if (!isActiveCombatContext(owner, target)) {
-            return AbilityResult.failure("WILL_DISRUPT_REQUIRES_COMBAT_CONTEXT");
-        }
         if (isSensitiveArea(owner)) {
             return AbilityResult.failure("WILL_DISRUPT_BLOCKED_NEAR_SENSITIVE_AREA");
         }
@@ -240,19 +238,35 @@ public final class AbilityService {
         }
         final com.riftcompanions.combat.EncounterProfile profile = com.riftcompanions.combat.EncounterAdapterRegistry.profileFor(target);
         final int baseDuration = profile.known() ? Math.max(1, profile.disruptTicks()) : 60;
-        final int duration = Math.max(8, Math.round(baseDuration * selection.durationScaleFor(selected)));
+        int duration = Math.max(8, Math.round(baseDuration * selection.durationScaleFor(selected)));
+        // Danger context: double duration, ensure resisted bosses get >10 seconds
+        final boolean dangerContext = com.riftcompanions.hive.control.WillControlEligibility.isDangerContext(owner, target);
+        if (dangerContext) {
+            duration = duration * 2;
+            if (selected.resisted()) {
+                duration = Math.max(duration, 220); // minimum 11 seconds for resisted targets in danger
+            }
+        }
         final int amplifier = selected.resisted() ? 0 : (profile.known() ? profile.disruptAmplifier() : 2);
         if (!seer.consumeEnergy(energy) || !seer.addHiveStrain(strain)) {
             return AbilityResult.failure("SEER_ENERGY_OR_STRAIN_LIMIT");
         }
         seer.setAbilityCooldown(CompanionAbility.SEER_DISRUPT, 200L);
         seer.beginVisualAction(CompanionAction.SEER_RELEASE, 14);
+        // Danger mode visual/audio feedback
+        if (dangerContext) {
+            seer.beginVisualAction(CompanionAction.SEER_DANGER_MODE, 60);
+            owner.serverLevel().playSound(null, seer.getX(), seer.getY(), seer.getZ(),
+                    com.riftcompanions.registry.ModSounds.SEER_DANGER_MODE.get(), net.minecraft.sounds.SoundSource.PLAYERS, 0.7F, 1.0F);
+            owner.serverLevel().sendParticles(net.minecraft.core.particles.ParticleTypes.SOUL_FIRE_FLAME,
+                    seer.getX(), seer.getY() + 1.0D, seer.getZ(), 24, 0.5D, 0.8D, 0.5D, 0.02D);
+        }
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, duration, amplifier, false, true, true));
         target.setDeltaMovement(Vec3.ZERO);
         owner.serverLevel().sendParticles(ParticleTypes.END_ROD, target.getX(), target.getY() + target.getBbHeight() * 0.5D,
                 target.getZ(), effectCount(selected.resisted() ? 8 : 18), 0.25D, 0.35D, 0.25D, 0.02D);
         DialogueService.get().speak(seer, "hive_disrupt", 1);
-        return AbilityResult.success(selected.resisted() ? "WILL_DISRUPT_PARTIAL_RESISTANCE" : "WILL_DISRUPT_APPLIED", seer);
+        return AbilityResult.success(dangerContext ? "WILL_DISRUPT_DANGER_MODE_APPLIED" : (selected.resisted() ? "WILL_DISRUPT_PARTIAL_RESISTANCE" : "WILL_DISRUPT_APPLIED"), seer);
     }
 
     private static AbilityResult castHiveChannel(final ServerPlayer owner, final CompanionEntity seer, final com.riftcompanions.hive.control.HiveControlMode mode) {

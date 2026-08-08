@@ -52,7 +52,8 @@ public enum CompanionAction {
     CONTEXT_BIOME_BRIEF,
     CONTEXT_STRUCTURE_BRIEF,
     CONTEXT_REST_REQUEST,
-    CONTEXT_ROUTE_NOTE;
+    CONTEXT_ROUTE_NOTE,
+    SEER_DANGER_MODE;
 
     public static CompanionAction byId(final int id) {
         final CompanionAction[] values = values();

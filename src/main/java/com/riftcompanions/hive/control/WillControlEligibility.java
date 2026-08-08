@@ -31,7 +31,31 @@ public final class WillControlEligibility {
     }
 
     /**
-     * A broad hostile type boundary is not permission for passive farm control.
+     * Will can control any eligible hostile monster — even without active combat.
+     * This allows normal-use hive control on nearby threats without requiring
+     * them to be currently attacking the player.
+     */
+    public static boolean isNearbyThreat(final ServerPlayer owner, final Mob target) {
+        if (owner == null || !isEligible(target)) return false;
+        return true;
+    }
+
+    /**
+     * Danger context: the owner is under active attack, low health, or mobs are
+     * very close. In this state Will's control is 2x stronger (double duration)
+     * and can subdue even boss-tier mobs for extended windows (>10 seconds).
+     */
+    public static boolean isDangerContext(final ServerPlayer owner, final Mob target) {
+        if (owner == null || !isEligible(target)) return false;
+        final LivingEntity currentTarget = target.getTarget();
+        if (currentTarget == owner) return true;
+        if (currentTarget instanceof CompanionEntity companion && companion.isOwnedBy(owner)) return true;
+        if (target.distanceToSqr(owner) <= 10.0D * 10.0D) return true;
+        return owner.getHealth() <= owner.getMaxHealth() * 0.50F;
+    }
+
+    /**
+     * Legacy combat-context check retained for AbilityService gating.
      * The target must actively threaten the owner or an owned companion, with a
      * narrow low-health close-threat fallback for a last-second defensive cast.
      */

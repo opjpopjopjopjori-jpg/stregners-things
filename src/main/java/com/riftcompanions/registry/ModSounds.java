@@ -26,6 +26,7 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> SEER_FOCUS = register("seer_focus");
     public static final RegistryObject<SoundEvent> SEER_RELEASE = register("seer_release");
     public static final RegistryObject<SoundEvent> SEER_SHATTER = register("seer_shatter");
+    public static final RegistryObject<SoundEvent> SEER_DANGER_MODE = register("seer_danger_mode");
     public static final RegistryObject<SoundEvent> SEER_RECOVERY = register("seer_recovery");
 
     public static final RegistryObject<SoundEvent> GIFTED_NOTICE = register("gifted_notice");

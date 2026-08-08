@@ -27,7 +27,16 @@ import java.util.UUID;
 public final class HiveChannelManager {
     private static final double CONTROL_RANGE = 32.0D;
     private static final int MAX_CANDIDATE_SCAN = 32;
+    /** Duration multiplier when Will is in danger context — 2x stronger control. */
+    private static final double DANGER_DURATION_MULTIPLIER = 2.0D;
     private static final Map<UUID, HiveChannel> CHANNELS = new HashMap<>();
+    /** Tracks whether Will is currently in danger context, for HUD indicator. */
+    private static final Map<UUID, Boolean> DANGER_ACTIVE = new HashMap<>();
+
+    /** Public query for HUD: is Will in danger mode for this player? */
+    public static boolean isDangerModeActive(final ServerPlayer player) {
+        return player != null && DANGER_ACTIVE.getOrDefault(player.getUUID(), false);
+    }
 
     private HiveChannelManager() {}
 
@@ -146,11 +155,36 @@ public final class HiveChannelManager {
             return;
         }
 
+        // Detect danger context: any selected target is actively threatening or player is in danger
+        final boolean dangerContext = selection.targets().stream()
+                .anyMatch(t -> WillControlEligibility.isDangerContext(player, t.target()));
+        final boolean wasDangerActive = DANGER_ACTIVE.getOrDefault(player.getUUID(), false);
+        if (dangerContext && !wasDangerActive) {
+            // Will just entered danger mode — play dramatic sound + visual indicator
+            DANGER_ACTIVE.put(player.getUUID(), true);
+            seer.beginVisualAction(CompanionAction.SEER_DANGER_MODE, 60);
+            play(player, seer, ModSounds.SEER_DANGER_MODE.get());
+            player.serverLevel().sendParticles(net.minecraft.core.particles.ParticleTypes.SOUL_FIRE_FLAME,
+                    seer.getX(), seer.getY() + 1.0D, seer.getZ(), 24, 0.5D, 0.8D, 0.5D, 0.02D);
+            HiveLinkStatusService.send(player, null, channel.mode(), 0,
+                    "⚡ WILL DANGER MODE — Control strength doubled!");
+        } else if (!dangerContext && wasDangerActive) {
+            DANGER_ACTIVE.put(player.getUUID(), false);
+        }
+
         int applied = 0;
         int resisted = 0;
         long longestDuration = 0L;
         for (final WillControlBudget.ControlTarget target : selection.targets()) {
-            final long duration = scaledDuration(channel.mode(), channel.surge(), selection.durationScaleFor(target));
+            long duration = scaledDuration(channel.mode(), channel.surge(), selection.durationScaleFor(target));
+            // Danger context: double the duration for all modes
+            if (WillControlEligibility.isDangerContext(player, target.target())) {
+                duration = Math.round(duration * DANGER_DURATION_MULTIPLIER);
+            }
+            // In danger mode, even resisted bosses get extended control (>10 seconds = >200 ticks)
+            if (target.resisted() && WillControlEligibility.isDangerContext(player, target.target())) {
+                duration = Math.max(duration, 220L); // minimum 11 seconds for resisted targets in danger
+            }
             if (HiveControlManager.apply(target.target(), target.resolvedMode(), duration, seer.position())) {
                 applied++;
                 longestDuration = Math.max(longestDuration, duration);
@@ -177,8 +211,9 @@ public final class HiveChannelManager {
         play(player, seer, resisted > 0 ? ModSounds.HIVE_RESIST.get() : ModSounds.HIVE_RELEASE.get());
         HiveTeamReactionService.onApplied(player, seer, channel.mode(), selection.targets().get(0).target(), applied);
         final String message = resisted > 0
-                ? "Control applied with resistance. Use the short opening."
-                : channel.surge() ? "Will Surge applied. Move before the opening closes." : "Will control applied.";
+                ? dangerContext ? "DANGER MODE - Resisted control extended! Strike now!" : "Control applied with resistance. Use the short opening."
+                : channel.surge() ? "Will Surge applied. Move before the opening closes."
+                : dangerContext ? "WILL DANGER MODE - Control strength doubled!" : "Will control applied.";
         sendSelectionStatus(player, selection.targets().get(0).target(), channel.mode(), (int) longestDuration, selection, message);
     }
 
@@ -212,7 +247,7 @@ public final class HiveChannelManager {
 
     private static List<Mob> findTargets(final ServerPlayer player, final CompanionEntity seer) {
         return player.level().getEntitiesOfClass(Mob.class, seer.getBoundingBox().inflate(CONTROL_RANGE),
-                        target -> WillControlEligibility.isActiveThreat(player, target) && seer.hasLineOfSight(target)
+                        target -> WillControlEligibility.isNearbyThreat(player, target) && seer.hasLineOfSight(target)
                                 && player.serverLevel().hasChunkAt(target.blockPosition()))
                 .stream().sorted(Comparator.comparingDouble(seer::distanceToSqr)).limit(MAX_CANDIDATE_SCAN).toList();
     }
@@ -221,7 +256,7 @@ public final class HiveChannelManager {
         final List<Mob> result = new ArrayList<>();
         for (final UUID id : ids) {
             final var entity = player.serverLevel().getEntity(id);
-            if (entity instanceof Mob target && WillControlEligibility.isActiveThreat(player, target)
+            if (entity instanceof Mob target && WillControlEligibility.isNearbyThreat(player, target)
                     && seer.hasLineOfSight(target) && seer.distanceToSqr(target) <= CONTROL_RANGE * CONTROL_RANGE
                     && player.serverLevel().hasChunkAt(target.blockPosition())) {
                 result.add(target);

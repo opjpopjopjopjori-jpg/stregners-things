@@ -14,6 +14,7 @@
   "seer_focus": {"sounds": [{"name": "riftcompanions:companions/seer_focus", "stream": false}]},
   "seer_release": {"sounds": [{"name": "riftcompanions:companions/seer_release", "stream": false}]},
   "seer_shatter": {"sounds": [{"name": "riftcompanions:companions/seer_shatter", "stream": false}]},
+  "seer_danger_mode": {"sounds": [{"name": "riftcompanions:companions/seer_danger_mode", "stream": false}]},
   "seer_recovery": {"sounds": [{"name": "riftcompanions:companions/seer_recovery", "stream": false}]},
 
   "gifted_notice": {"sounds": [{"name": "riftcompanions:companions/gifted_notice", "stream": false}]},

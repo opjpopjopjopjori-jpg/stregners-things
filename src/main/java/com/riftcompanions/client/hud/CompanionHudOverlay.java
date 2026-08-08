@@ -63,14 +63,29 @@ public final class CompanionHudOverlay {
         if (hive.active()) {
             final int linkY = Math.min(height - 60, y + 2);
             final int linkWidth = Math.max(cardWidth, 370);
-            graphics.fill(x, linkY, x + linkWidth, linkY + 31, 0xD9192A40);
-            graphics.drawString(minecraft.font, "WILL LINK: " + hive.message() + " (" + hive.remainingTicksNow() + "t)",
-                    x + 6, linkY + 4, 0xFFB9E8FF, false);
+            final boolean dangerMode = hive.message() != null && hive.message().contains("DANGER MODE");
+            final int bgColor = dangerMode ? 0xD9401020 : 0xD9192A40;
+            final int titleColor = dangerMode ? 0xFFFF5555 : 0xFFB9E8FF;
+            final int detailColor = dangerMode ? 0xFFFFAA88 : 0xFFDAE8FF;
+            graphics.fill(x, linkY, x + linkWidth, linkY + 31, bgColor);
+            if (dangerMode) {
+                // Pulsing danger border
+                final long pulse = System.currentTimeMillis() % 800L;
+                final int borderAlpha = pulse < 400 ? 0xFF : (int) (0xFF * (1.0D - (pulse - 400) / 400.0D));
+                final int borderColor = (borderAlpha << 24) | 0x00FF3333;
+                graphics.fill(x, linkY, x + 3, linkY + 31, borderColor);
+                graphics.fill(x + linkWidth - 3, linkY, x + linkWidth, linkY + 31, borderColor);
+                graphics.drawString(minecraft.font, "\u26A1 WILL DANGER MODE \u26A1", x + 6, linkY + 4, titleColor, true);
+            } else {
+                graphics.drawString(minecraft.font, "WILL LINK: " + hive.message() + " (" + hive.remainingTicksNow() + "t)",
+                        x + 6, linkY + 4, titleColor, false);
+            }
             if (hive.controlCapacityHearts() > 0) {
                 graphics.drawString(minecraft.font, "Targets " + hive.targetCount() + "/" + hive.targetLimit()
                                 + " | Load " + hive.controlLoadHearts() + "/" + hive.controlCapacityHearts()
-                                + " hearts (" + hive.controlLoadPercent() + "%)",
-                        x + 6, linkY + 17, 0xFFDAE8FF, false);
+                                + " hearts (" + hive.controlLoadPercent() + "%)"
+                                + (dangerMode ? " | 2x DURATION" : ""),
+                        x + 6, linkY + 17, detailColor, false);
             }
         }
 
