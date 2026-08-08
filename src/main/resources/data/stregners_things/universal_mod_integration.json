@@ -1,0 +1,14 @@
+{
+  "engine_version": "2.0.0-universal",
+  "supported_namespaces": ["vanilla", "iceandfire"],
+  "feature_categories": {
+    "mobs": ["dragon", "gorgon", "troll", "hydra", "death_worm"],
+    "biomes": ["frost_desert", "fire_forest", "ice_tower"],
+    "structures": ["dragon_cave", "ice_tower"],
+    "items": ["scale", "steel_sword"],
+    "weapons": ["ice_sword", "fire_sword"],
+    "magic": ["fire_ball", "ice_shard", "blizzard"],
+    "weather": ["blizzard", "fire_storm"]
+  },
+  "ai_integration_contract": "Given any namespace, read ModDiscoverySystem data and generate coherent English dialogue/stories referencing all features. No errors allowed. Works with 200+ mobs."
+}

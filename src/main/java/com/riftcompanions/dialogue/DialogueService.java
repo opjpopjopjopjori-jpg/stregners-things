@@ -79,11 +79,20 @@ public final class DialogueService {
                     .filter(line -> available(player.getUUID(), line, now))
                     .sorted(Comparator.comparingInt(DialogueLine::priority))
                     .toList();
+            // Enhanced: check DialogueDatabase for additional professional dialogue lines
+            // when JSON reload listener has no matches (prevents NO_AVAILABLE_LINE errors)
+            List<DialogueLine> combinedCandidates = new java.util.ArrayList<>(candidates);
             if (candidates.isEmpty()) {
+                for (String text : com.riftcompanions.dialogue.DialogueDatabase.getDialogue(trigger)) {
+                    combinedCandidates.add(new DialogueLine("db_" + trigger + "_" + text.hashCode(), companion.getRole(), trigger, 2, 1200L, text));
+                }
+            }
+            final List<DialogueLine> finalCandidates = combinedCandidates.isEmpty() ? candidates : combinedCandidates;
+            if (finalCandidates.isEmpty()) {
                 recordDebug(player.getUUID(), trigger, "NO_AVAILABLE_LINE", now);
                 return SpeakResult.notSent("NO_AVAILABLE_LINE");
             }
-            final DialogueLine selected = candidates.get(companion.getRandom().nextInt(candidates.size()));
+            final DialogueLine selected = finalCandidates.get(companion.getRandom().nextInt(finalCandidates.size()));
             final Long lastNormal = lastNormalMessageAt.get(player.getUUID());
             if (selected.priority() >= 2 && !pairedReply && lastNormal != null && now - lastNormal < NORMAL_CHAT_BUDGET) {
                 recordDebug(player.getUUID(), trigger, "NORMAL_BUDGET_COOLDOWN", now);

@@ -1,0 +1,12 @@
+{
+  "system_name": "Professional Universal Discovery System v3.0",
+  "purpose": "Auto-discover any mod namespace and generate AI-ready structured data for complete 5-chapter story integration",
+  "categories": ["MOB", "BIOME", "STRUCTURE", "ITEM", "BLOCK", "WEAPON", "MAGIC", "WEATHER", "DIMENSION", "ENTITY", "EFFECT"],
+  "validation_rules": {
+    "no_errors_allowed": true,
+    "all_features_must_be_referenced": true,
+    "hostile_mobs_trigger_combat_dialogue": true,
+    "magical_items_trigger_power_dialogue": true
+  },
+  "ai_contract": "Given discovered features, generate complete sequential English dialogue, prerequisite checks, tactical plans, event progression, and resolution linking all 5 chapters using ONLY discovered elements. No omissions. No errors. Professional quality."
+}
