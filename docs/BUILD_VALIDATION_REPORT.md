@@ -24,10 +24,10 @@ Short Stagger path for overload and partial boss resistance
 Wither and Ender Dragon partial-resistance tag entries
 Display-only Will target count and heart load/capacity HUD packet fields
 Guardian Brace and Scout Signal bounded tactical actions
-Entire prior visual direction retired and all eight 512×512 RGBA character atlas files regenerated
+Entire prior visual direction retired and all eight 64×64 RGBA character atlas files regenerated
 Four original faceted-character Geo models preserving the shared_humanoid_v2 animation backbone
 68–72 bones and 57–61 bounded cuboid layers per role for tapered face planes, independent eyes/lids/brows/jaw/mouth, layered hair, articulated body, and grounded clothing
-faceted_character_512_v2 visual contract with UV, parent-graph, canonical-pivot, face-bone, hair-motion, and animation-bone validation
+faceted_character_64_v2 visual contract with UV, parent-graph, canonical-pivot, face-bone, hair-motion, and animation-bone validation
 Three independent GeckoLib controllers: body action, face expression, and secondary hair/clothing motion
 Natural gait director: travel-vector body heading plus event-driven finite eye-lead/head-turn/hold/head-return/eye-recenter gestures; idle/alert head yaw stays neutral
 Authored local blink, eye drift, brow expression, jaw-talk, secondary hair/clothing sway, and differentiated role idle/walk/run/combat/power/recovery presentation
@@ -85,7 +85,7 @@ The JAR must remain above the requested 3 MB threshold through substantive origi
 
 The reported integrated-world crash was traced to Java static field order in the mod's nine JSON reload listeners. Each listener now initializes `GSON` before `INSTANCE`, and the source validator checks that ordering. The built class bytecode must also show the `Gson` `putstatic` before listener singleton construction.
 
-This proves that the prior null-Gson construction path is removed from the packaged bytecode. The faceted 512px Geo/atlas/face/hair contract is also source-validated. Neither check replaces a real Minecraft client regression test for world creation, texture rendering, culling, animation clipping, or GPU cost.
+This proves that the prior null-Gson construction path is removed from the packaged bytecode. The faceted 64px Geo/atlas/face/hair contract is also source-validated. Neither check replaces a real Minecraft client regression test for world creation, texture rendering, culling, animation clipping, or GPU cost.
 
 ## Warnings
 

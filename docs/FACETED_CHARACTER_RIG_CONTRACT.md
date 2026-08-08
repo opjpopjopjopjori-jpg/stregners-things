@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The four companion models use the original `faceted_character_512_v2` presentation extension over the stable `shared_humanoid_v2` animation backbone. It replaces the earlier one-block head and flat-skin approach with a bounded cuboid-only faceted character rig compatible with GeckoLib.
+The four companion models use the original `faceted_character_64_v2` presentation extension over the stable `shared_humanoid_v2` animation backbone. It replaces the earlier one-block head and flat-skin approach with a bounded cuboid-only faceted character rig compatible with GeckoLib.
 
 ## Model composition
 
@@ -53,7 +53,7 @@ Hair is split into role-specific crown/back/side/front locks. Idle, walk, and ru
 
 1. Every animation bone reference must exist in the matching Geo model.
 2. All Geo parents must resolve without a cycle.
-3. UV rectangles must remain inside the 512×512 atlas.
+3. UV rectangles must remain inside the 64×64 atlas.
 4. At least the normal idle clip must drive authored blink, gaze, and brow components.
 5. Walk and run must contain secondary role hair motion.
 6. Actual Minecraft review remains required for culling, close-range face readability, eye/lid alignment, clipping, blend quality, and FPS/VRAM cost.

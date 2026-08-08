@@ -1,6 +1,6 @@
 package com.riftcompanions.animation;
 
-/** Texture-compatible enhanced animations using 512x512 RGBA islands:
+/** Texture-compatible enhanced animations using 64x64 RGBA islands:
  *  - eye_tile / accent_tile / thread_tile for face expressions
  *  - hair_tile for secondary hair motion
  *  - jacket / shirt / field / cloth / weather for clothing

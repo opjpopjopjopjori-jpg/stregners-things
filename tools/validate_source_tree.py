@@ -39,7 +39,7 @@ def main() -> int:
         "gifted": "gifted_public.png",
         "scout": "scout_public.png",
     }
-    texture_size = 512
+    texture_size = 64
     for role, texture_name in roles.items():
         texture = ASSETS / "textures/entity/personal" / texture_name
         image = Image.open(texture)
@@ -48,7 +48,7 @@ def main() -> int:
         require(image.mode == "RGBA", f"{texture_name} must remain RGBA; found {image.mode}")
         public_image = Image.open(ASSETS / "textures/entity/public" / public_textures[role])
         require(public_image.size == (texture_size, texture_size) and public_image.mode == "RGBA",
-                f"public {role} texture must match the faceted 512px atlas contract")
+                f"public {role} texture must match the faceted 64px atlas contract")
         geometry = json.loads((ASSETS / "geo" / f"{role}.geo.json").read_text(encoding="utf-8"))
         geometry_root = geometry["minecraft:geometry"][0]
         description = geometry_root["description"]
@@ -77,7 +77,7 @@ def main() -> int:
                 ancestry.add(current)
                 current = parent_by_name.get(current)
         require(description.get("riftcompanions_rig_contract") == "shared_humanoid_v2", f"{role} must use shared_humanoid_v2")
-        require(description.get("riftcompanions_visual_contract") == "faceted_character_512_v2",
+        require(description.get("riftcompanions_visual_contract") == "faceted_character_64_v2",
                 f"{role} must use the faceted character visual contract")
         require(canonical_rig.issubset(bone_names), f"{role} is missing a canonical shared animation rig bone")
         pivots = {bone["name"]: bone["pivot"] for bone in bones}
@@ -173,7 +173,7 @@ def main() -> int:
     state_contract = json.loads((ASSETS / "animation_contracts/companion_animation_states.json").read_text(encoding="utf-8"))
     marker_contract = json.loads((ASSETS / "animation_contracts/core_animation_timeline.json").read_text(encoding="utf-8"))
     require(rig_contract.get("rig_id") == "shared_humanoid_v2"
-            and rig_contract.get("visual_extension_contract") == "faceted_character_512_v2",
+            and rig_contract.get("visual_extension_contract") == "faceted_character_64_v2",
             "shared modular rig contract is invalid")
     require(state_contract.get("state_authority") == "server_derived_visual_state", "animation state authority contract is invalid")
     forbidden_markers = {"MODIFY_INVENTORY", "PLACE_BLOCK", "DAMAGE_RANDOM_ENTITY", "START_PLAN", "WRITE_MEMORY", "CHANGE_AI_STATE"}
@@ -439,7 +439,7 @@ def main() -> int:
             require(stripped.count(opening) == stripped.count(closing), f"unbalanced {opening}{closing} in {java.relative_to(ROOT)}")
 
     print(f"PASS: {len(json_files)} JSON resources, {len(entries)} dialogue lines, {len(list((ROOT / 'src/main/java').glob('**/*.java')))} Java source files")
-    print("PASS: 512px faceted-character texture/Geo/animation contracts, reliability/profile schemas, and approved Forge build scaffold")
+    print("PASS: 64px faceted-character texture/Geo/animation contracts, reliability/profile schemas, and approved Forge build scaffold")
     return 0
 
 

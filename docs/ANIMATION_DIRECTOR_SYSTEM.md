@@ -450,7 +450,7 @@ Each role file contains the complete role clip family. This avoids duplicate sou
 Artist workflow:
 
 ```text
-1. Edit a Blockbench copy using shared_humanoid_v2 and faceted_character_512_v2.
+1. Edit a Blockbench copy using shared_humanoid_v2 and faceted_character_64_v2.
 2. Export/update the role Geo JSON and aggregated role animation JSON.
 3. Run tools/rebuild_faceted_character_assets.py to restore original geometry, all texture atlases, facial/hair motion, and source review output.
 4. Run tools/validate_source_tree.py and tools/verify_user_requirements.py.
@@ -521,7 +521,7 @@ No raw GeckoLib playback cache is persisted. On reload, existing save recovery r
 
 | Budget | Source rule |
 |---|---|
-| Geometry | Original faceted character layers use the shared 512×512 texture/Geo contract: tapered head, independent face bones, hair locks, and articulated clothing. No external mesh runtime or unbounded detail path is permitted. |
+| Geometry | Original faceted character layers use the shared 64×64 texture/Geo contract: tapered head, independent face bones, hair locks, and articulated clothing. No external mesh runtime or unbounded detail path is permitted. |
 | Animation evaluation | One mapped body controller per active companion. |
 | Active companions | Safe source limit remains two. |
 | Distant presentation | Above 32 blocks, optional VFX/trails must be reduced or omitted; no gameplay change occurs. |

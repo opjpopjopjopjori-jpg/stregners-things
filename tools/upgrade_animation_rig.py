@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Legacy migration guard for pre-modular companion Geo JSON.
 
-Current 512px faceted assets already declare shared_humanoid_v2 and this tool
+Current 64px faceted assets already declare shared_humanoid_v2 and this tool
 leaves them unchanged. It is retained only to migrate an older generated asset
 into the animation-safe backbone; it never alters hitboxes or gameplay behavior.
 """

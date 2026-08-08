@@ -8,15 +8,15 @@ Personal presentation assets are private alternate-continuity companion material
 
 | Asset ID | Association | Source / license note | States | Tier | Fallback |
 |---|---|---|---|---|---|
-| `personal/will_seer` | Seer | Project-generated private presentation | observe, Hive focus, recovery | 512×512 RGBA | `public/seer_public` |
-| `personal/hopper_sheriff` | Guardian | Project-generated private presentation | guard, retreat, recovery | 512×512 RGBA | `public/guardian_public` |
-| `personal/eleven_gifted` | Gifted | Project-generated private presentation | focus, shield, rescue, exhausted | 512×512 RGBA | `public/gifted_public` |
-| `personal/max_scout` | Scout | Project-generated private presentation | route point, lookout, grounding | 512×512 RGBA | `public/scout_public` |
-| `public/seer_public` | Seer | Original generic public role presentation | core visual states | 512×512 RGBA | role-color HUD |
-| `public/guardian_public` | Guardian | Original generic public role presentation | core visual states | 512×512 RGBA | role-color HUD |
-| `public/gifted_public` | Gifted | Original generic public role presentation | core visual states | 512×512 RGBA | role-color HUD |
-| `public/scout_public` | Scout | Original generic public role presentation | core visual states | 512×512 RGBA | role-color HUD |
-| `faceted_character_512_v2` | All companions | Original faceted visual extension over `shared_humanoid_v2` | tapered head, eyes, lids, brows, jaw, mouth, layered hair, articulated clothing | 512px Geo JSON / Blockbench | canonical backbone and safe idle fallback |
+| `personal/will_seer` | Seer | Project-generated private presentation | observe, Hive focus, recovery | 64×64 RGBA | `public/seer_public` |
+| `personal/hopper_sheriff` | Guardian | Project-generated private presentation | guard, retreat, recovery | 64×64 RGBA | `public/guardian_public` |
+| `personal/eleven_gifted` | Gifted | Project-generated private presentation | focus, shield, rescue, exhausted | 64×64 RGBA | `public/gifted_public` |
+| `personal/max_scout` | Scout | Project-generated private presentation | route point, lookout, grounding | 64×64 RGBA | `public/scout_public` |
+| `public/seer_public` | Seer | Original generic public role presentation | core visual states | 64×64 RGBA | role-color HUD |
+| `public/guardian_public` | Guardian | Original generic public role presentation | core visual states | 64×64 RGBA | role-color HUD |
+| `public/gifted_public` | Gifted | Original generic public role presentation | core visual states | 64×64 RGBA | role-color HUD |
+| `public/scout_public` | Scout | Original generic public role presentation | core visual states | 64×64 RGBA | role-color HUD |
+| `faceted_character_64_v2` | All companions | Original faceted visual extension over `shared_humanoid_v2` | tapered head, eyes, lids, brows, jaw, mouth, layered hair, articulated clothing | 64px Geo JSON / Blockbench | canonical backbone and safe idle fallback |
 | `social_world_clip_family` | All companions | Original authored animation expansion | campfire, weather, horizon, base, work, cave, village, travel, calm, listen, point, reassurance, gear, observe | GeckoLib JSON | text/state fallback and urgent interruption |
 | `core_animation_timeline` | All companions | Original project marker/VFX/sound metadata | server-confirmed visual timing only | JSON contract | HUD/chat/state fallback |
 

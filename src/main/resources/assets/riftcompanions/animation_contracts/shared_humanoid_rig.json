@@ -407,12 +407,12 @@
     "Legacy bridge bones exist only for backward-compatible clips and are not new authoring targets.",
     "New clips target canonical bones and keep movement within the declared constraints."
   ],
-  "visual_extension_contract": "faceted_character_512_v2",
+  "visual_extension_contract": "faceted_character_64_v2",
   "visual_extension_rules": [
     "Role-prefixed visual bones must parent to canonical animation-safe bones.",
     "Faceted head, eye, lid, brow, jaw, mouth, hair, and clothing bones are presentation-only.",
     "Authored eye movement is local presentation only; it never tracks players, scans terrain, or grants perception.",
-    "All role/profile texture atlases use the shared 512px UV scale.",
+    "All role/profile texture atlases use the shared 64px UV scale.",
     "Visual bones must remain bounded within declared visible bounds and preserve canonical pivots.",
     "Hitbox, collision, damage, gameplay authority, and player input never follow visual bone transforms."
   ]

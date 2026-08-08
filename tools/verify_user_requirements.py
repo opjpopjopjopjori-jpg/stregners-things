@@ -51,12 +51,12 @@ def main() -> int:
     texture_dir = RUNTIME / "resources/assets/riftcompanions/textures/entity/personal"
     for name in textures:
         image = Image.open(texture_dir / name)
-        require(image.size == (512, 512), f"{name} is not 512x512")
+        require(image.size == (64, 64), f"{name} is not 64x64")
         require(image.mode == "RGBA", f"{name} is not RGBA")
     public_dir = RUNTIME / "resources/assets/riftcompanions/textures/entity/public"
     for name in ("seer_public.png", "guardian_public.png", "gifted_public.png", "scout_public.png"):
         image = Image.open(public_dir / name)
-        require(image.size == (512, 512) and image.mode == "RGBA", f"public profile texture invalid: {name}")
+        require(image.size == (64, 64) and image.mode == "RGBA", f"public profile texture invalid: {name}")
 
     hive_sound_dir = RUNTIME / "resources/assets/riftcompanions/sounds/hive"
     for name in ("notice.ogg", "focus.ogg", "release.ogg", "resist.ogg", "recovery.ogg"):
@@ -192,7 +192,7 @@ def main() -> int:
 
     print("PASS: Forge 1.20.1 metadata")
     print("PASS: approved Forge build scaffold")
-    print("PASS: eight 512x512 faceted companion textures")
+    print("PASS: eight 64x64 faceted companion textures")
     print(f"PASS: English-only project and {len(dialogue['entries'])} English dialogue entries")
     print("PASS: expected team, rescue, base, inventory, conversation, natural-world, social dialogue, reliability, navigation, consequence, perception, scene, policy, profile, duo, arc, and visual-state source modules")
     return 0
