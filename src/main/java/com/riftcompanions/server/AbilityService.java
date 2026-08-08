@@ -280,7 +280,7 @@ public final class AbilityService {
             return AbilityResult.failure("GIFTED_ENERGY_LOW");
         }
         final ServerLevel level = owner.serverLevel();
-        final List<Monster> targets = level.getEntitiesOfClass(Monster.class, gifted.getBoundingBox().inflate(32.0D),
+        final List<Monster> targets = level.getEntitiesOfClass(Monster.class, gifted.getBoundingBox().inflate(20.0D),
                 target -> !target.getType().is(ModTags.PROTECTED_FROM_COMPANIONS)
                         && gifted.hasLineOfSight(target))
                 .stream().sorted(Comparator.comparingDouble(gifted::distanceToSqr)).limit(5).toList();
@@ -328,7 +328,7 @@ public final class AbilityService {
     }
 
     private static AbilityResult castGiftedShield(final ServerPlayer owner, final CompanionEntity gifted) {
-        if (gifted.distanceToSqr(owner) > 32.0D * 32.0D) {
+        if (gifted.distanceToSqr(owner) > 20.0D * 20.0D) {
             return AbilityResult.failure("SHIELD_TARGET_OUT_OF_RANGE");
         }
         final ServerLevel level = owner.serverLevel();
