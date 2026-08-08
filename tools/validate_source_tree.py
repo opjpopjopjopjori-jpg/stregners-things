@@ -12,6 +12,7 @@ import sys
 from pathlib import Path
 
 from PIL import Image
+from verify_animations_comprehensive import main as audit_animations
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "src/main/resources/assets/riftcompanions"
@@ -439,6 +440,7 @@ def main() -> int:
             require(stripped.count(opening) == stripped.count(closing), f"unbalanced {opening}{closing} in {java.relative_to(ROOT)}")
 
     print(f"PASS: {len(json_files)} JSON resources, {len(entries)} dialogue lines, {len(list((ROOT / 'src/main/java').glob('**/*.java')))} Java source files")
+    audit_animations()
     print("PASS: 64px faceted-character texture/Geo/animation contracts, reliability/profile schemas, and approved Forge build scaffold")
     return 0
 
