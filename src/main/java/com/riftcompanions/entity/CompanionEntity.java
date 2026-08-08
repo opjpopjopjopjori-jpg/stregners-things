@@ -266,8 +266,12 @@ public abstract class CompanionEntity extends Mob implements GeoEntity {
         // A target acquired by the bounded vanilla target selector must move the
         // companion into a real combat state before follow/formation logic can
         // overwrite its navigation order.
-        if (hasActiveCombatTarget() && (getCompanionState() == CompanionState.FOLLOWING
+        if ((hasActiveCombatTarget() || isCombatActiveAround(owner)) && (getCompanionState() == CompanionState.FOLLOWING
                 || getCompanionState() == CompanionState.IDLE || getCompanionState() == CompanionState.OBSERVING)) {
+            if (!hasActiveCombatTarget()) {
+                final Monster bestThreat = nearestThreat(owner, 32.0D);
+                if (bestThreat != null) this.setTarget(bestThreat);
+            }
             clearFormationSlot("VISIBLE_HOSTILE_ENGAGED");
             setCompanionState(CompanionState.FIGHTING, "VISIBLE_HOSTILE_ENGAGED");
         }
@@ -358,10 +362,14 @@ public abstract class CompanionEntity extends Mob implements GeoEntity {
     }
 
     private void tickPassive(final ServerPlayer owner, final long now) {
-        if (getCompanionState() == CompanionState.FIGHTING) {
-            // CompanionMeleeGoal owns movement toward the confirmed target. A
-            // formation path must never overwrite it and make combat look frozen.
-            if (hasActiveCombatTarget()) {
+        if (getCompanionState() == CompanionState.FIGHTING || isCombatActiveAround(owner)) {
+            if (hasActiveCombatTarget() || (this.getTarget() != null && this.getTarget().isAlive())) {
+                return;
+            }
+            final Monster next = nearestThreat(owner, 32.0D);
+            if (next != null) {
+                this.setTarget(next);
+                setCompanionState(CompanionState.FIGHTING, "VISIBLE_HOSTILE_ENGAGED");
                 return;
             }
             this.setTarget(null);
@@ -596,11 +604,26 @@ public abstract class CompanionEntity extends Mob implements GeoEntity {
         };
     }
 
+    public boolean isCombatActiveAround(final ServerPlayer owner) {
+        if (owner == null) return false;
+        return !this.level().getEntitiesOfClass(Monster.class, owner.getBoundingBox().inflate(32.0D),
+                m -> m.isAlive() && mayFight(m)).isEmpty();
+    }
+
     private Monster nearestThreat(final ServerPlayer owner, final double radius) {
         Monster best = null;
         double bestScore = Double.MAX_VALUE;
         for (final Monster candidate : this.level().getEntitiesOfClass(Monster.class, owner.getBoundingBox().inflate(radius), this::mayFight)) {
-            final double score = candidate.distanceToSqr(owner) + candidate.distanceToSqr(this) * 0.25D;
+            double score = candidate.distanceToSqr(owner) + candidate.distanceToSqr(this) * 0.25D;
+            if (this.role == CompanionRole.GUARDIAN) {
+                if (candidate.distanceToSqr(owner) < 64.0D) score *= 0.5D;
+            } else if (this.role == CompanionRole.SEER) {
+                if (!com.riftcompanions.hive.control.HiveControlManager.isControlled(candidate)) score *= 0.4D;
+            } else if (this.role == CompanionRole.GIFTED) {
+                score *= 0.7D;
+            } else if (this.role == CompanionRole.SCOUT) {
+                score *= 0.6D;
+            }
             if (score < bestScore) {
                 best = candidate;
                 bestScore = score;
@@ -620,10 +643,8 @@ public abstract class CompanionEntity extends Mob implements GeoEntity {
                 && this.distanceToSqr(target) <= pursuit * pursuit;
     }
 
-    /** Will is deliberately a warning/support role rather than an autonomous melee attacker. */
     public boolean allowsCombatAction() {
         return this.entityData.get(COMBAT_ENABLED)
-                && this.role != CompanionRole.SEER
                 && getCompanionState() != CompanionState.HOLDING
                 && getCompanionState() != CompanionState.RESTING
                 && getCompanionState() != CompanionState.RETREATING

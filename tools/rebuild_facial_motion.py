@@ -109,21 +109,26 @@ def body_clips(role: str) -> dict[str, Any]:
         "chest": {"rotation": rotation((0.0, [lean, 0, 0]), (half_run, [lean + 2, 0, 0]), (run_length, [lean, 0, 0]))},
     })
 
-    combat = animation(1.05, True, {
-        "body": {"rotation": rotation((0.0, [4, 0, 0]), (0.52, [2, 0, 0]), (1.05, [4, 0, 0]))},
-        "chest": {"rotation": rotation((0.0, [style["lean"] * 0.38, 0, 0]), (0.52, [style["lean"] * 0.25, 0, 0]), (1.05, [style["lean"] * 0.38, 0, 0]))},
-        "left_arm": {"rotation": rotation((0.0, [-18 if role == "seer" else -25, 0, 8]), (0.52, [-13, 0, 5]), (1.05, [-18 if role == "seer" else -25, 0, 8]))},
-        "right_arm": {"rotation": rotation((0.0, [-18 if role == "seer" else -25, 0, -8]), (0.52, [-13, 0, -5]), (1.05, [-18 if role == "seer" else -25, 0, -8]))},
-        "left_leg": {"rotation": rotation((0.0, [5, 0, 0]), (1.05, [5, 0, 0]))},
-        "right_leg": {"rotation": rotation((0.0, [-5, 0, 0]), (1.05, [-5, 0, 0]))},
+    combat = animation(1.10, True, {
+        "body": {"rotation": rotation((0.0, [6, 0, 0]), (0.55, [3, 4, 0]), (1.10, [6, 0, 0]))},
+        "chest": {"rotation": rotation((0.0, [style["lean"] * 0.45, 0, 0]), (0.55, [style["lean"] * 0.30, 8, 0]), (1.10, [style["lean"] * 0.45, 0, 0]))},
+        "left_arm": {"rotation": rotation((0.0, [-22 if role == "seer" else -32, 10, 12]), (0.55, [-16, 6, 8]), (1.10, [-22 if role == "seer" else -32, 10, 12]))},
+        "right_arm": {"rotation": rotation((0.0, [-22 if role == "seer" else -32, -10, -12]), (0.55, [-16, -6, -8]), (1.10, [-22 if role == "seer" else -32, -10, -12]))},
+        "left_arm_lower": {"rotation": rotation((0.0, [25, 0, 0]), (0.55, [35, 0, 0]), (1.10, [25, 0, 0]))},
+        "right_arm_lower": {"rotation": rotation((0.0, [25, 0, 0]), (0.55, [35, 0, 0]), (1.10, [25, 0, 0]))},
+        "left_leg": {"rotation": rotation((0.0, [8, 0, 0]), (0.55, [4, 0, 0]), (1.10, [8, 0, 0]))},
+        "right_leg": {"rotation": rotation((0.0, [-8, 0, 0]), (0.55, [-4, 0, 0]), (1.10, [-8, 0, 0]))},
     })
 
     def attack(hand: str, strength: float, lateral: float) -> dict[str, Any]:
         opposite = "left_arm" if hand == "right_arm" else "right_arm"
-        return animation(0.64, False, {
-            "body": {"rotation": rotation((0.0, [0, 0, 0]), (0.22, [strength * 0.25, 0, lateral]), (0.64, [0, 0, 0]))},
-            hand: {"rotation": rotation((0.0, [-8, 0, 0]), (0.22, [-strength, 0, -lateral]), (0.64, [0, 0, 0]))},
-            opposite: {"rotation": rotation((0.0, [0, 0, 0]), (0.22, [-22, 0, lateral * 0.55]), (0.64, [0, 0, 0]))},
+        return animation(0.70, False, {
+            "body": {"rotation": rotation((0.0, [0, 0, 0]), (0.12, [strength * -0.15, 0, lateral * -0.6]), (0.28, [strength * 0.35, 0, lateral * 1.2]), (0.48, [strength * 0.15, 0, lateral * 0.5]), (0.70, [0, 0, 0]))},
+            "chest": {"rotation": rotation((0.0, [0, 0, 0]), (0.12, [-8, lateral * -0.5, 0]), (0.28, [14, lateral * 1.0, 0]), (0.48, [6, lateral * 0.4, 0]), (0.70, [0, 0, 0]))},
+            hand: {"rotation": rotation((0.0, [-8, 0, 0]), (0.12, [24, 0, -lateral * 0.4]), (0.28, [-strength, 0, -lateral]), (0.48, [-strength * 0.4, 0, -lateral * 0.4]), (0.70, [0, 0, 0]))},
+            opposite: {"rotation": rotation((0.0, [0, 0, 0]), (0.12, [-18, 0, lateral * 0.3]), (0.28, [-22, 0, lateral * 0.55]), (0.48, [-12, 0, lateral * 0.25]), (0.70, [0, 0, 0]))},
+            "left_leg": {"rotation": rotation((0.0, [0, 0, 0]), (0.12, [6, 0, 0]), (0.28, [-15, 0, 0]), (0.48, [-6, 0, 0]), (0.70, [0, 0, 0]))},
+            "right_leg": {"rotation": rotation((0.0, [0, 0, 0]), (0.12, [-6, 0, 0]), (0.28, [12, 0, 0]), (0.48, [5, 0, 0]), (0.70, [0, 0, 0]))},
         })
 
     attack_strength = 72 if role == "guardian" else 84 if role == "scout" else 65
@@ -133,11 +138,13 @@ def body_clips(role: str) -> dict[str, Any]:
         "combat_ready": combat,
         "melee_attack_1": attack("right_arm", attack_strength, -11),
         "melee_attack_2": attack("left_arm", attack_strength - 7, 11),
-        "melee_attack_3": animation(0.72, False, {
-            "body": {"rotation": rotation((0.0, [0, 0, 0]), (0.28, [12, 0, 12 if role in {"guardian", "scout"} else -8]), (0.72, [0, 0, 0]))},
-            "right_arm": {"rotation": rotation((0.0, [0, 0, 0]), (0.28, [-(attack_strength - 4), 0, -15]), (0.72, [0, 0, 0]))},
-            "left_arm": {"rotation": rotation((0.0, [0, 0, 0]), (0.28, [-28, 0, 12]), (0.72, [0, 0, 0]))},
-            "left_leg": {"rotation": rotation((0.0, [0, 0, 0]), (0.28, [10, 0, 0]), (0.72, [0, 0, 0]))},
+        "melee_attack_3": animation(0.80, False, {
+            "body": {"rotation": rotation((0.0, [0, 0, 0]), (0.16, [-12, -15, -8]), (0.36, [18, 22, 12 if role in {"guardian", "scout"} else -8]), (0.56, [8, 10, 5]), (0.80, [0, 0, 0]))},
+            "chest": {"rotation": rotation((0.0, [0, 0, 0]), (0.16, [-10, -18, 0]), (0.36, [16, 25, 0]), (0.56, [6, 10, 0]), (0.80, [0, 0, 0]))},
+            "right_arm": {"rotation": rotation((0.0, [0, 0, 0]), (0.16, [35, -15, -10]), (0.36, [-(attack_strength * 1.15), 15, -18]), (0.56, [-(attack_strength * 0.4), 8, -8]), (0.80, [0, 0, 0]))},
+            "left_arm": {"rotation": rotation((0.0, [0, 0, 0]), (0.16, [30, 15, 10]), (0.36, [-38, -12, 14]), (0.56, [-16, -5, 6]), (0.80, [0, 0, 0]))},
+            "left_leg": {"rotation": rotation((0.0, [0, 0, 0]), (0.16, [8, 0, 0]), (0.36, [-22, 0, 0]), (0.56, [-8, 0, 0]), (0.80, [0, 0, 0]))},
+            "right_leg": {"rotation": rotation((0.0, [0, 0, 0]), (0.16, [-8, 0, 0]), (0.36, [15, 0, 0]), (0.56, [6, 0, 0]), (0.80, [0, 0, 0]))},
         }),
     }
 
@@ -382,7 +389,7 @@ def secondary_clips(role: str) -> dict[str, Any]:
         "secondary_idle": secondary_clip(role, "idle", 3.60, style["hair"] * 0.42, 0.65),
         "secondary_walk": secondary_clip(role, "walk", style["walk_len"], style["hair"], 1.10),
         "secondary_run": secondary_clip(role, "run", style["run_len"], style["hair"] * 1.58, 1.80),
-        "secondary_combat": secondary_clip(role, "combat", 1.05, style["hair"] * 0.72, 0.85),
+        "secondary_combat": secondary_clip(role, "combat", 1.10, style["hair"] * 1.50, 1.35),
         "secondary_power": secondary_clip(role, "power", 1.20, style["hair"] * 0.86, 0.70),
         "secondary_context": secondary_clip(role, "context", 1.20, style["hair"] * 0.48, 0.56),
         "secondary_recovery": secondary_clip(role, "recovery", 2.10, style["hair"] * 0.30, 0.35),

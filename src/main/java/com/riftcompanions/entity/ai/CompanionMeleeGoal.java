@@ -25,7 +25,7 @@ public final class CompanionMeleeGoal extends Goal {
     @Override
     public boolean canUse() {
         final LivingEntity target = companion.getTarget();
-        final double pursuit = com.riftcompanions.config.CompanionConfig.COMBAT_PROFILE.get().pursuitRadius();
+        final double pursuit = Math.max(32.0D, com.riftcompanions.config.CompanionConfig.COMBAT_PROFILE.get().pursuitRadius());
         return companion.allowsCombatAction()
                 && target != null
                 && target.isAlive()
@@ -49,14 +49,12 @@ public final class CompanionMeleeGoal extends Goal {
         if (target == null) {
             return;
         }
-        // Combat can deliberately square the body to the target; ordinary
-        // path-following attention remains head-only in the gait director.
         companion.orientCombatBodyToward(target);
         companion.clearFormationSlot("MELEE_TARGET_ENGAGED");
         companion.setCompanionState(com.riftcompanions.entity.CompanionState.FIGHTING, "MELEE_TARGET_ENGAGED");
         final double range = companion.getBbWidth() * 2.0D + target.getBbWidth();
         if (companion.distanceToSqr(target) > range * range) {
-            companion.getNavigation().moveTo(target, speed);
+            companion.getNavigation().moveTo(target, Math.max(1.30D, speed));
             return;
         }
         companion.getNavigation().stop();
@@ -64,9 +62,7 @@ public final class CompanionMeleeGoal extends Goal {
             attackDelay--;
             return;
         }
-        attackDelay = 18;
-        // Damage remains a server-owned vanilla combat result. The visual strike
-        // is requested only after that result, never as an animation marker.
+        attackDelay = 12;
         if (companion.doHurtTarget(target)) {
             companion.beginVisualAction(com.riftcompanions.entity.CompanionAction.MELEE_ATTACK, 14L);
         }

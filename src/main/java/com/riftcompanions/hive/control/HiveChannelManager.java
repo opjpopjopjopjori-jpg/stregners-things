@@ -264,20 +264,8 @@ public final class HiveChannelManager {
     }
 
     private static long scaledDuration(final HiveControlMode requestedMode, final boolean surge, final float scale) {
-        final long base = surge ? switch (requestedMode) {
-            case SUSPEND -> 64L;
-            case REDIRECT -> 58L;
-            case SHATTER -> 48L;
-            case SWARM_FREEZE -> 56L;
-            case STAGGER -> 20L;
-        } : switch (requestedMode) {
-            case SUSPEND -> 50L;
-            case REDIRECT -> 45L;
-            case SHATTER -> 40L;
-            case SWARM_FREEZE -> 45L;
-            case STAGGER -> 20L;
-        };
-        return Math.max(1L, Math.round(base * Math.max(0.05F, Math.min(1.0F, scale))));
+        final long base = surge ? 220L : 40L;
+        return Math.max(20L, Math.round(base * Math.max(0.10F, Math.min(1.0F, scale))));
     }
 
     private static long cooldownFor(final HiveControlMode mode) {

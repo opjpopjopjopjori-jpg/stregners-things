@@ -56,7 +56,7 @@ public final class GiftedBehaviorService {
         }
 
         final boolean rescueOpening = hasDownedTeammate(player);
-        final int nearbyHostiles = player.level().getEntitiesOfClass(Monster.class, player.getBoundingBox().inflate(7.0D), Monster::isAlive).size();
+        final int nearbyHostiles = player.level().getEntitiesOfClass(Monster.class, player.getBoundingBox().inflate(32.0D), Monster::isAlive).size();
         final boolean immediateEmergency = player.isInLava() || player.isOnFire() || player.fallDistance > 3.0F
                 || player.getHealth() <= player.getMaxHealth() * 0.30F || nearbyHostiles >= 4;
         final boolean shieldOpening = nearbyHostiles >= 3 || immediateEmergency;

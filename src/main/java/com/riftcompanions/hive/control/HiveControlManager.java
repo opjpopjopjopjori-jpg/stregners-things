@@ -112,6 +112,18 @@ public final class HiveControlManager {
             }
         }
         if (now % 10L == 0L) emit(level, mob, mode, false);
+        if (now % 20L == 0L && mob instanceof net.minecraft.world.entity.monster.Monster monster) {
+            monster.hurt(level.damageSources().magic(), 3.0F);
+            final net.minecraft.world.entity.monster.Monster other = level.getEntitiesOfClass(
+                    net.minecraft.world.entity.monster.Monster.class, monster.getBoundingBox().inflate(16.0D),
+                    m -> m.isAlive() && m != monster).stream()
+                    .min(java.util.Comparator.comparingDouble(monster::distanceToSqr)).orElse(null);
+            if (other != null) {
+                monster.setNoAi(false);
+                monster.setTarget(other);
+                other.setTarget(monster);
+            }
+        }
     }
 
     /** Raises a controlled target gradually without teleporting or loading terrain. */

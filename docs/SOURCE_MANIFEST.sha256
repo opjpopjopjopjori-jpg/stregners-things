@@ -76,7 +76,7 @@ a11d4297f49fb65feb90a5e5a2500bd9fd4cb892f48f6792ae65dca2bf73c50b  ./src/main/jav
 0cadb76626622041c8561d4bbb9965c4b893425335aaa494d6d0902d31540162  ./src/main/java/com/riftcompanions/behavior/BehaviorProfileRegistry.java
 f682bcea72f9bf0e38195c905a5c61543dc623f910660de4f0e560614e24e4af  ./src/main/java/com/riftcompanions/behavior/BehaviorProfileReloadListener.java
 78d03f07a258b7b77e3daa7ebbbdd8c20ad1d347e4bd6f81123ce0c16ea92144  ./src/main/java/com/riftcompanions/behavior/CompanionBehaviorProfile.java
-19898bd6607e01ec3cf506b221c2f742117f182e1facf1829a3275c2866f5d6a  ./src/main/java/com/riftcompanions/behavior/GiftedBehaviorService.java
+5e075aadc250c0e9b4850efffd2c3b128f7d2af639db221e1b0adf6eb4fbadf6  ./src/main/java/com/riftcompanions/behavior/GiftedBehaviorService.java
 d2c08700a3bc7bcce015ca6ece91f8c736836492625de32de24ed28c3ef108cc  ./src/main/java/com/riftcompanions/behavior/GiftedBehaviorState.java
 ec5f0c22d5cd4bc66f2fd909acf4c030eedb7cafc5421d2ee9a2c3b1c1d97ac1  ./src/main/java/com/riftcompanions/behavior/GiftedReadinessBand.java
 2152a89adc154413556d14033384cf626655f893bfc61e2f778e1ad024b6a841  ./src/main/java/com/riftcompanions/behavior/GuardianBehaviorService.java
@@ -152,7 +152,7 @@ c0054af2b2c4f24fa0ed60ab76221fe3d0846d9ee63c931d45838ee86dcea8c4  ./src/main/jav
 1f9bccf3f97a6baee5ed1e28687a5582c76f6ffb23aafec45e745ddb92a87e07  ./src/main/java/com/riftcompanions/encounter/WorldEncounterProfile.java
 60b944e7d230462153b6ce8ed1ef82ce45ed43d482c92b6bcb6c29b26958ac8a  ./src/main/java/com/riftcompanions/entity/CompanionAbility.java
 2555a338071612f6e4486a401cc0bb3c4ff4cb4af623aaa7458f46d8dc43c409  ./src/main/java/com/riftcompanions/entity/CompanionAction.java
-263eae54d65b84962218454907d2d2a16ca3c12871d2b3bf5ac297a72a24d1ab  ./src/main/java/com/riftcompanions/entity/CompanionEntity.java
+ff5d8caf47e9c00943bd023942bb1743014a099dc6343369038234811e48d879  ./src/main/java/com/riftcompanions/entity/CompanionEntity.java
 01d3cdc31777485f79831dc4ec4f7cae2f47ea01e1e7679b3815fa7eb213a7e6  ./src/main/java/com/riftcompanions/entity/CompanionLifecycle.java
 491087b89e29f7d25e8382766902698140edc89b9f59073b4924360e17e217ac  ./src/main/java/com/riftcompanions/entity/CompanionLookIntent.java
 80d25c51a6b0363c1aa72a6af6a63a40044d6f71ea8a255607d191ad0c825f31  ./src/main/java/com/riftcompanions/entity/CompanionRole.java
@@ -163,7 +163,7 @@ d03128f64909058ac66bcbf4662c2e0ef9c3b0c8172efe5051bcdc34c1df2995  ./src/main/jav
 6527fb86efdc423dc1c37220f23f8d523002df181117ca4d17f4ccf73088cfe3  ./src/main/java/com/riftcompanions/entity/GuardianCompanionEntity.java
 adfca90ef5e057395e9b2d1ad4f21d011f41e540fabb4d073e6c714bafed26ee  ./src/main/java/com/riftcompanions/entity/ScoutCompanionEntity.java
 595882c55e144fd220f72868bbf28098099c336387ac55846b1c4b1149994b38  ./src/main/java/com/riftcompanions/entity/SeerCompanionEntity.java
-4e7fde2f92b50bd182019b49a14df9c032280f44b03b051f6a05f18b4fcc0117  ./src/main/java/com/riftcompanions/entity/ai/CompanionMeleeGoal.java
+a84f2a668d26c05e3d8b4bc4186f9233542f3706f2a959dc0372c195b8509743  ./src/main/java/com/riftcompanions/entity/ai/CompanionMeleeGoal.java
 4d18e4371d3680da501d28aa799b84608403de51f69f948bd8248d0c35209c9e  ./src/main/java/com/riftcompanions/event/CommonEvents.java
 eb8fa6e57d1a22a2970ddcf068c0ba94fdece4fb2c3a83e04677cde15a32f048  ./src/main/java/com/riftcompanions/event/TeamSyncEvents.java
 7153302df11a99d5b788d2273bff275c1f6c348a47d8f331e0b5472efd823383  ./src/main/java/com/riftcompanions/feature/FeatureFlag.java
@@ -175,8 +175,8 @@ ca110f61fee533fcc7846e087006ebb8b594f1857d55b726969e57b896e666bc  ./src/main/jav
 89cc493ab498cc521827b096d872f3ab3d4b12b748307d8a401701d36137b839  ./src/main/java/com/riftcompanions/hive/control/BossInteractionRegistry.java
 a23be4bb3c4cc3a8234d6e7c18444033da9e3eea6a7ef330c96c4640d26efa2e  ./src/main/java/com/riftcompanions/hive/control/BossResistanceLevel.java
 efe88368121822d448c2d1c44ab9f124466cf8f2ea77054e0b128dd83251c689  ./src/main/java/com/riftcompanions/hive/control/HiveChannel.java
-ab69c54a5585dfbcf93cc144e5c3f0880807fc0ae97594887fdedd94e8af5cc9  ./src/main/java/com/riftcompanions/hive/control/HiveChannelManager.java
-1831fdace8c18d2c1809ab9aa44687fc2d1a5461e73638ca72855c544f43f995  ./src/main/java/com/riftcompanions/hive/control/HiveControlManager.java
+8aae86b59b975e2606d0d6c82908a595971c418c9cfb832ffa18466392f92030  ./src/main/java/com/riftcompanions/hive/control/HiveChannelManager.java
+8d1c3b3ed487a610c0b9f209e6f3b549b4e8834404f7091f6ce025f77156502d  ./src/main/java/com/riftcompanions/hive/control/HiveControlManager.java
 77f67196e95bb4611b61c6969cca542701be54089aed3c557bcef047b8462f99  ./src/main/java/com/riftcompanions/hive/control/HiveControlMode.java
 bf74846129a6e8da36b91e437f012f1028aa61fe1b7a9f89188fa7092ba62279  ./src/main/java/com/riftcompanions/hive/control/HiveLinkStatusService.java
 4e088a8651c4877d94f859906e763d74412474d412a6f46d5dfc2586b1877d0b  ./src/main/java/com/riftcompanions/hive/control/HiveTeamReactionService.java
@@ -284,12 +284,12 @@ dbe8eb8205c04fb797378dbba35c281ac5025e2c9b86d0ee32b08d2861952d3a  ./src/main/jav
 bc37b6df61fe09572c820db14bac1fc0de24554737981ad60cca62a1580d91a6  ./src/main/java/com/riftcompanions/scene/SceneState.java
 def73dd21702e7e185acdba5386c1574e48b435caae89ace3836f395176b2ce0  ./src/main/java/com/riftcompanions/scene/SetPieceService.java
 72eec795fb0bdd00dc731f3c83f57c285095e57efcf114ad2140a22a0a9becfc  ./src/main/java/com/riftcompanions/scene/SetPieceType.java
-9622dc0ed5cb063b2af03737b133c789fa5950c416abae322500b5e6cc353f0d  ./src/main/java/com/riftcompanions/server/AbilityService.java
+df71bbb408cfa4062efd91c25be9d9d5dbca24531743c6362fcd22b554695735  ./src/main/java/com/riftcompanions/server/AbilityService.java
 4120395c59a63595403a9e256938a950a871ae22b7dbd71e8d2c1134bf9a13b5  ./src/main/java/com/riftcompanions/server/BaseAnchorService.java
 09b89a06c9711668219343b00b53c131a111455013b6f38667d0b7b9e1989811  ./src/main/java/com/riftcompanions/server/BaseMilestoneService.java
 474528eec9e5d0c4fee83c5fcf2dbf708448dacb0dccfb08a71a0262cd211386  ./src/main/java/com/riftcompanions/server/CompanionInventoryService.java
 264847cc3b5ab7682b36f898bd3f06a21bc63a3d3748a64d3eb926c48f2f6d18  ./src/main/java/com/riftcompanions/server/CompanionLifecycleService.java
-8df150eec92b519146248429a77d69f536ad0b923497b97eb3ea7c352c1435fd  ./src/main/java/com/riftcompanions/server/CompanionPresentationSoundService.java
+6c00b59020e151f039b28298c3dd596c12fca3097f2f22560e85fc4cd252506d  ./src/main/java/com/riftcompanions/server/CompanionPresentationSoundService.java
 5ae8be79d866173ae3f60cfa10748e5a216085b5f094995a4beaf82873404eea  ./src/main/java/com/riftcompanions/server/FocusTargetService.java
 aba457d44f88fcc6f26f5a5b90934401a9403d6c9870b5ab9ea4a8751a7ebc68  ./src/main/java/com/riftcompanions/server/GuardianBraceService.java
 f80ca8f6edc2360582318a2c36ada50a60adfa3e3cebfd24d8bd8e8f102ead1c  ./src/main/java/com/riftcompanions/server/MilestoneTransactionService.java
@@ -356,10 +356,10 @@ a0bb06676534a7e787e8ee15ef1ccdda814fe6b75cfd956423cb25db7a2f56fb  ./src/main/jav
 c89f2f5671508289dd59e0603e1a1dc4071247cf185f8a6283b2b43d0081a3a1  ./src/main/resources/assets/riftcompanions/animation_contracts/companion_animation_states.json
 d637d204ea97a7abe440677630b078c46bcbcabe8a3c4ae3a2873afc3cfd31af  ./src/main/resources/assets/riftcompanions/animation_contracts/core_animation_timeline.json
 7202966f5bd834bfb4b0f3890d046184af99b0e9b496a21d3168e3d26970666e  ./src/main/resources/assets/riftcompanions/animation_contracts/shared_humanoid_rig.json
-a45dce79b225e15c159a6621fd98763884bb5ba3eac720f808872e5d1334ac78  ./src/main/resources/assets/riftcompanions/animations/gifted.animation.json
-cda1770c8ebadb47d6c8f1e28b88429e3dbd0ac48c0834e205a2445e9dd4c66c  ./src/main/resources/assets/riftcompanions/animations/guardian.animation.json
-36a2780f686ce13d2d5926edf64ff918e843fa0c21407e1cf228fafa98558da9  ./src/main/resources/assets/riftcompanions/animations/scout.animation.json
-0858c98c51c1555722a308e141579a7c9e49a00fae4305bad6af39a7ac77d9c9  ./src/main/resources/assets/riftcompanions/animations/seer.animation.json
+fa0652d73af4ef1e0318d37dcd69a334edd2727ec5355df02e68a5e35c13979e  ./src/main/resources/assets/riftcompanions/animations/gifted.animation.json
+07d3f9309573dc7b29d56f1a9422915975b7ff49aba39ed58ddf2898d627aa8f  ./src/main/resources/assets/riftcompanions/animations/guardian.animation.json
+1eecd577e578eeea1a1e0da533587143a239a60850c093de8491a06691099126  ./src/main/resources/assets/riftcompanions/animations/scout.animation.json
+31c38186502d5ab9eef5d6f32659b4174ec195bf0bc11cbe346327fb1b123761  ./src/main/resources/assets/riftcompanions/animations/seer.animation.json
 24875befa080abcc5ecb983ccba81e6541a132ae22ed37fa24683a759d0ec595  ./src/main/resources/assets/riftcompanions/geo/gifted.geo.json
 734a6ae9eba50e6efd9f33d6a751ec6ba920107585812e06801fff888c52a1f7  ./src/main/resources/assets/riftcompanions/geo/guardian.geo.json
 cf478550585da383191ef53fd6446cd4b80934e351500317170f9ed26702b03b  ./src/main/resources/assets/riftcompanions/geo/scout.geo.json
@@ -426,7 +426,7 @@ e0f2839ff04695ff9e2918b7e907716b812fb1538238926b9305a9b2014a73eb  ./src/main/res
 e6127eee872b475012d11d662d7f5bca15f3f6466c19a3ab9be1d88b39060b1b  ./tools/generate_original_audio_library.py
 d158241d95e675f75b17c30ba683c8b75a5ab17cc490f538603882f4d46e9ba0  ./tools/generate_social_animation_expansion.py
 8d4db56489d7cc4d5f2770900eab11941cab72a47867d997baeea32839660679  ./tools/rebuild_faceted_character_assets.py
-49a43d4efc516138f19f343c7d9322814b4bf5009b47db8ae85228e6acf4aec6  ./tools/rebuild_facial_motion.py
+5e0adfcf1254c71c452ddef1ab7e9a3bb00d7b2a9bc4f068836ee018a2f8245f  ./tools/rebuild_facial_motion.py
 fde982f487d392e49322b90af68cbc48d07aede32f08c81148ff374dcfe15c15  ./tools/render_modular_model_preview.py
 ca10426d4a3f5c829ef945fee5344e3a60d37474060da5a266523f643b024efe  ./tools/upgrade_animation_rig.py
 bc21f5c2275ff095b36b2fde89324703b5807b1dd4dcbcd1d24471cf0a5126b6  ./tools/validate_source_tree.py
