@@ -53,18 +53,20 @@ class Palette:
 # Original, non-portrait palettes. They intentionally describe only broad,
 # grounded late-1980s character archetypes and never reproduce screen pixels.
 PERSONAL_PALETTES = (
-    Palette("will_seer.png", "WILL / SEER", "seer", (204, 178, 164), (126, 93, 88), (234, 209, 193),
-            (70, 55, 47), (130, 102, 81), (85, 101, 101), (70, 91, 111), (124, 148, 167),
-            (145, 87, 74), (57, 70, 86), (54, 63, 78), (74, 56, 44), (131, 132, 128), (160, 132, 96)),
-    Palette("hopper_sheriff.png", "HOPPER / GUARDIAN", "guardian", (194, 148, 121), (108, 73, 62), (224, 180, 149),
-            (73, 69, 65), (149, 142, 130), (86, 80, 67), (82, 61, 47), (135, 103, 79),
-            (106, 98, 85), (71, 75, 77), (53, 61, 69), (77, 54, 39), (152, 151, 142), (137, 123, 96)),
-    Palette("eleven_gifted.png", "ELEVEN / GIFTED", "gifted", (212, 177, 163), (129, 84, 84), (237, 207, 190),
-            (79, 62, 52), (137, 105, 84), (82, 96, 91), (68, 94, 121), (122, 149, 174),
-            (211, 201, 183), (74, 96, 119), (51, 64, 79), (66, 53, 47), (142, 145, 144), (157, 104, 88)),
-    Palette("max_scout.png", "MAX / SCOUT", "scout", (229, 166, 134), (168, 92, 76), (246, 196, 163),
-            (163, 68, 41), (222, 118, 72), (79, 112, 96), (112, 68, 62), (167, 102, 84),
-            (81, 111, 133), (91, 73, 69), (49, 64, 80), (78, 57, 43), (145, 145, 141), (189, 150, 79)),
+    # Hand-authored palettes informed by the supplied references: hair, eye and
+    # everyday clothing direction only — no photo pixels or portrait transfer.
+    Palette("will_seer.png", "WILL / SEER", "seer", (205, 171, 151), (118, 82, 70), (239, 205, 182),
+            (48, 37, 31), (105, 78, 60), (91, 104, 83), (73, 83, 92), (132, 145, 152),
+            (104, 61, 53), (55, 67, 83), (43, 52, 66), (61, 45, 36), (136, 137, 130), (150, 51, 47)),
+    Palette("hopper_sheriff.png", "HOPPER / GUARDIAN", "guardian", (202, 151, 122), (112, 72, 55), (232, 183, 148),
+            (82, 67, 53), (145, 126, 101), (83, 105, 122), (113, 100, 75), (163, 148, 110),
+            (225, 218, 196), (61, 76, 87), (49, 59, 68), (83, 59, 42), (157, 153, 139), (118, 91, 53)),
+    Palette("eleven_gifted.png", "ELEVEN / GIFTED", "gifted", (220, 174, 151), (135, 83, 70), (247, 206, 182),
+            (57, 42, 36), (117, 82, 64), (100, 80, 50), (72, 88, 104), (131, 151, 166),
+            (194, 172, 153), (65, 78, 92), (48, 58, 72), (72, 52, 42), (154, 151, 140), (135, 72, 73)),
+    Palette("max_scout.png", "MAX / SCOUT", "scout", (232, 169, 134), (173, 91, 72), (250, 201, 168),
+            (168, 67, 39), (232, 126, 72), (80, 112, 101), (72, 91, 108), (120, 145, 162),
+            (209, 74, 57), (65, 83, 101), (45, 58, 75), (73, 51, 37), (150, 147, 135), (217, 164, 72)),
 )
 
 PUBLIC_PALETTES = (
@@ -240,12 +242,57 @@ def garment_panels(image: Image.Image, palette: Palette, rng: random.Random) -> 
         draw.line((lx + lw // 2, ly + 4, lx + lw // 2, ly + lh - 6), fill=rgba(dark(palette.pants, 0.42)), width=1)
 
 
+def character_finish(image: Image.Image, palette: Palette) -> None:
+    """Add readable fabric and hair direction to the role's existing UV islands."""
+    draw = ImageDraw.Draw(image)
+    # Fine, non-repeating hair fibres keep the layered hair cuboids from reading as flat blocks.
+    x, y, w, h = rect("hair_tile")
+    strand = mix(palette.hair, palette.hair_light, 0.58)
+    shade = dark(palette.hair, 0.52)
+    for offset in range(3, w - 2, 4):
+        draw.line((x + offset, y + 3, x + max(2, offset - 5), y + h - 3), fill=rgba(strand), width=1)
+    draw.line((x + 2, y + h - 4, x + w - 3, y + h - 4), fill=rgba(shade), width=1)
+
+    # Eyes and iris materials are tiled independently by the animated face bones.
+    ex, ey, ew, eh = rect("eye_tile")
+    draw.rounded_rectangle((ex + 4, ey + 7, ex + ew - 5, ey + eh - 7), radius=5, fill=rgba((235, 238, 228)), outline=rgba((112, 99, 89)), width=1)
+    ax, ay, aw, ah = rect("accent_tile")
+    draw.ellipse((ax + 9, ay + 7, ax + aw - 10, ay + ah - 8), fill=rgba(palette.iris), outline=rgba(dark(palette.iris, .48)), width=2)
+    tx, ty, tw, th = rect("thread_tile")
+    draw.rectangle((tx, ty, tx + tw - 1, ty + th - 1), fill=rgba(dark(palette.hair, .34)))
+    draw.ellipse((tx + 15, ty + 12, tx + 33, ty + 33), fill=rgba((25, 22, 21)))
+    draw.ellipse((tx + 19, ty + 15, tx + 24, ty + 20), fill=rgba((232, 235, 226)))
+
+    # Role clothes: deliberate seam, pocket, plaid and lining variations.
+    if palette.role == "seer":
+        for name in ("cloth_tile", "torso_front"):
+            px, py, pw, ph = rect(name)
+            for line in range(px + 8, px + pw, 13): draw.line((line, py + 3, line, py + ph - 4), fill=rgba(mix(palette.outer, palette.accent, .48)), width=1)
+            for line in range(py + 8, py + ph, 13): draw.line((px + 3, line, px + pw - 4, line), fill=rgba(mix(palette.outer, palette.accent, .38)), width=1)
+    elif palette.role == "guardian":
+        px, py, pw, ph = rect("weather_tile")
+        draw.line((px + pw // 2, py + 4, px + pw // 2, py + ph - 5), fill=rgba(dark(palette.outer, .48)), width=2)
+        for yy in (py + 16, py + 31):
+            draw.line((px + 4, yy, px + pw - 5, yy), fill=rgba(mix(palette.outer, palette.outer_light, .35)), width=1)
+        px, py, pw, ph = rect("shirt_tile")
+        for yy in range(py + 9, py + ph - 4, 11): draw.line((px + 4, yy, px + pw - 5, yy), fill=rgba(mix(palette.inner, palette.skin_light, .25)), width=1)
+    elif palette.role == "gifted":
+        px, py, pw, ph = rect("field_tile")
+        for yy in range(py + 8, py + ph - 5, 9): draw.line((px + 3, yy, px + pw - 4, yy), fill=rgba(mix(palette.denim, palette.outer_light, .42)), width=1)
+        draw.line((px + pw // 2, py + 3, px + pw // 2, py + ph - 4), fill=rgba(dark(palette.denim, .50)), width=1)
+    else:
+        px, py, pw, ph = rect("jacket_tile")
+        draw.line((px + pw // 2, py + 3, px + pw // 2, py + ph - 4), fill=rgba(dark(palette.outer, .46)), width=2)
+        draw.rectangle((px + 6, py + 24, px + pw - 7, py + 49), outline=rgba(mix(palette.outer, palette.outer_light, .48)), width=1)
+
+
 def build_atlas(palette: Palette) -> Image.Image:
     rng = random.Random(zlib.crc32((palette.file_name + palette.label).encode("utf-8")))
     image = Image.new("RGBA", (TEXTURE_SIZE, TEXTURE_SIZE), (0, 0, 0, 0))
     material_tiles(image, palette, rng)
     face_panels(image, palette, rng)
     garment_panels(image, palette, rng)
+    character_finish(image, palette)
     return image
 
 
@@ -261,7 +308,7 @@ def preview(entries: list[tuple[Palette, Image.Image]]) -> None:
     canvas = Image.new("RGBA", (2 * (tile + margin) + margin, title_h + 2 * (tile + 56 + margin) + margin), (15, 21, 30, 255))
     draw = ImageDraw.Draw(canvas)
     draw.text((margin, 18), "Rift Companions — Original Faceted Character Texture Atlases", fill=(231, 239, 247, 255), font=font(22))
-    draw.text((margin, 49), "512px technical UV sheets for independent face, hair, clothing, and material geometry.", fill=(158, 183, 203, 255), font=font(12))
+    draw.text((margin, 49), "512px hand-authored UV sheets with readable hair fibres, eye materials, seams and clothing construction.", fill=(158, 183, 203, 255), font=font(12))
     for index, (palette, image) in enumerate(entries):
         x = margin + (index % 2) * (tile + margin)
         y = title_h + margin + (index // 2) * (tile + 56 + margin)
