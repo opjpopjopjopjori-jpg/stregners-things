@@ -190,7 +190,7 @@ public final class AbilityService {
             return AbilityResult.failure("SEER_ENERGY_LOW");
         }
         final List<Monster> visibleHostiles = owner.level().getEntitiesOfClass(Monster.class,
-                seer.getBoundingBox().inflate(20.0D), entity -> entity.isAlive() && seer.hasLineOfSight(entity));
+                seer.getBoundingBox().inflate(32.0D), entity -> entity.isAlive() && seer.hasLineOfSight(entity));
         seer.setAbilityCooldown(CompanionAbility.SEER_SENSE, 100L);
         seer.beginVisualAction(CompanionAction.SEER_NOTICE, 18);
         if (visibleHostiles.isEmpty()) {
@@ -215,7 +215,7 @@ public final class AbilityService {
      */
     private static AbilityResult castSeerDisrupt(final ServerPlayer owner, final CompanionEntity seer) {
         final List<net.minecraft.world.entity.Mob> candidates = owner.level().getEntitiesOfClass(net.minecraft.world.entity.Mob.class,
-                seer.getBoundingBox().inflate(10.0D), target -> com.riftcompanions.hive.control.WillControlEligibility.isActiveThreat(owner, target)
+                seer.getBoundingBox().inflate(32.0D), target -> com.riftcompanions.hive.control.WillControlEligibility.isActiveThreat(owner, target)
                         && seer.hasLineOfSight(target) && owner.serverLevel().hasChunkAt(target.blockPosition()))
                 .stream().sorted(Comparator.comparingDouble(seer::distanceToSqr)).toList();
         final com.riftcompanions.hive.control.WillControlBudget.Selection selection =

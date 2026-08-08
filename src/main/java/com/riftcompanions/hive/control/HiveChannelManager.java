@@ -25,7 +25,7 @@ import java.util.UUID;
  * resistant target cancels before a full release cost is charged.
  */
 public final class HiveChannelManager {
-    private static final double CONTROL_RANGE = 12.0D;
+    private static final double CONTROL_RANGE = 32.0D;
     private static final int MAX_CANDIDATE_SCAN = 32;
     private static final Map<UUID, HiveChannel> CHANNELS = new HashMap<>();
 
