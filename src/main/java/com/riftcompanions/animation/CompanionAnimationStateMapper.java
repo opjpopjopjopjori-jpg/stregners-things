@@ -59,6 +59,7 @@ public final class CompanionAnimationStateMapper {
             case SEER_RELEASE -> AnimationClip.oneShot("animation.seer.hive_release_suspend", AnimationPriority.POWER, 0.10F, true);
             case SEER_RELEASE_REDIRECT -> AnimationClip.oneShot("animation.seer.hive_release_redirect", AnimationPriority.POWER, 0.10F, true);
             case SEER_RELEASE_SHATTER -> AnimationClip.oneShot("animation.seer.hive_release_shatter", AnimationPriority.POWER, 0.10F, true);
+            case SEER_DANGER_MODE -> AnimationClip.loop("animation.seer.hive_danger_mode", AnimationPriority.POWER, 0.10F);
             case GIFTED_NOTICE -> AnimationClip.oneShot("animation.gifted.power_notice", AnimationPriority.POWER, 0.10F, true);
             case GIFTED_FOCUS -> AnimationClip.loop("animation.gifted.power_focus", AnimationPriority.POWER, 0.10F);
             case GIFTED_PUSH -> AnimationClip.oneShot("animation.gifted.push_release", AnimationPriority.POWER, 0.10F, true);

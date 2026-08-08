@@ -92,6 +92,7 @@ public final class CompanionAnimationController {
     private static boolean isPowerAction(final CompanionAction action) {
         return switch (action) {
             case SEER_NOTICE, SEER_FOCUS, SEER_RELEASE, SEER_RELEASE_REDIRECT, SEER_RELEASE_SHATTER,
+                    SEER_DANGER_MODE,
                     GIFTED_NOTICE, GIFTED_FOCUS, GIFTED_PUSH, GIFTED_SHIELD, GIFTED_RESCUE,
                     GUARDIAN_BRACE, SCOUT_ANCHOR, SCOUT_SIGNAL -> true;
             default -> false;
