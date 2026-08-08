@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "authority": {
+    "ai_state_source": "logical_server",
+    "animation_applies_gameplay": false,
+    "marker_is_client_authority": false,
+    "success_clip_requires_server_confirmation": true,
+    "forbidden_marker_behaviors": [
+      "MODIFY_INVENTORY",
+      "PLACE_BLOCK",
+      "DAMAGE_RANDOM_ENTITY",
+      "START_PLAN",
+      "WRITE_MEMORY",
+      "CHANGE_AI_STATE"
+    ]
+  },
+  "clip_markers": [
+    {
+      "clip": "animation.guardian.melee_attack_1",
+      "marker": "APPLY_MELEE_DAMAGE",
+      "seconds": 0.42,
+      "cancel_before_marker": false,
+      "server_note": "Server combat resolves the valid target before the confirmed strike cue."
+    },
+    {
+      "clip": "animation.guardian.retreat_signal",
+      "marker": "PLAY_SOUND",
+      "seconds": 0.28,
+      "cancel_before_marker": true,
+      "server_note": "Retreat plan state is already authoritative."
+    },
+    {
+      "clip": "animation.guardian.protect",
+      "marker": "APPLY_POWER_EFFECT",
+      "seconds": 0.14,
+      "cancel_before_marker": true,
+      "server_note": "Guardian Brace validates close range, nearby threat, energy, cooldown, and Safe Mode before a short damage-mitigation presentation."
+    },
+    {
+      "clip": "animation.seer.hive_release_suspend",
+      "marker": "APPLY_POWER_EFFECT",
+      "seconds": 0.28,
+      "cancel_before_marker": true,
+      "server_note": "Will control validates hostile eligibility, control-heart budget, policy, strain, cooldown, and boss resistance before presentation."
+    },
+    {
+      "clip": "animation.seer.hive_release_redirect",
+      "marker": "APPLY_POWER_EFFECT",
+      "seconds": 0.3,
+      "cancel_before_marker": true,
+      "server_note": "Will control validates hostile eligibility, control-heart budget, policy, strain, cooldown, and boss resistance before presentation."
+    },
+    {
+      "clip": "animation.seer.hive_release_shatter",
+      "marker": "APPLY_POWER_EFFECT",
+      "seconds": 0.34,
+      "cancel_before_marker": true,
+      "server_note": "Will control validates hostile eligibility, control-heart budget, policy, strain, cooldown, and boss resistance before presentation."
+    },
+    {
+      "clip": "animation.gifted.push_release",
+      "marker": "APPLY_POWER_EFFECT",
+      "seconds": 0.12,
+      "cancel_before_marker": true,
+      "server_note": "AbilityService validates targets and protected bystanders before presentation."
+    },
+    {
+      "clip": "animation.gifted.rescue_pull",
+      "marker": "APPLY_RESCUE",
+      "seconds": 0.24,
+      "cancel_before_marker": true,
+      "server_note": "AbilityService validates emergency, range, and safe destination before presentation."
+    },
+    {
+      "clip": "animation.scout.ranged_release",
+      "marker": "SET_TARGET_VISUAL_STATE",
+      "seconds": 0.16,
+      "cancel_before_marker": true,
+      "server_note": "Scout Signal validates active visible hostile targets before temporary Glowing mark presentation; it does not fire a projectile."
+    },
+    {
+      "clip": "animation.scout.mind_anchor_call",
+      "marker": "APPLY_ANCHOR_EFFECT",
+      "seconds": 0.32,
+      "cancel_before_marker": true,
+      "server_note": "MindAnchorService validates supported effect, policy, focus, cooldown, and safe local context before presentation."
+    },
+    {
+      "clip": "animation.scout.route_point",
+      "marker": "SPAWN_MARKER",
+      "seconds": 0.38,
+      "cancel_before_marker": true,
+      "server_note": "Route observation stays server-owned and never loads a chunk."
+    },
+    {
+      "clip": "animation.gifted.exhausted_recovery",
+      "marker": "BEGIN_RECOVERY",
+      "seconds": 0.2,
+      "cancel_before_marker": false,
+      "server_note": "Recovery state is server-owned; marker only communicates it."
+    }
+  ],
+  "vfx_profiles": [
+    {
+      "id": "gifted_push",
+      "bone": "right_hand",
+      "offset": [
+        0.0,
+        0.0,
+        -0.25
+      ],
+      "duration_seconds": 0.2,
+      "particle_cap": 18,
+      "low_effects_cap": 4,
+      "shape_backup": "outward_arc",
+      "color_note": "pale force wave; shape remains readable without color"
+    },
+    {
+      "id": "gifted_shield",
+      "bone": "chest",
+      "offset": [
+        0.0,
+        0.6,
+        0.0
+      ],
+      "duration_seconds": 4.5,
+      "particle_cap": 30,
+      "low_effects_cap": 7,
+      "shape_backup": "thin_ring_outline",
+      "color_note": "soft protective ring; no full-screen overlay"
+    },
+    {
+      "id": "gifted_rescue",
+      "bone": "left_hand",
+      "offset": [
+        0.0,
+        0.0,
+        -0.2
+      ],
+      "duration_seconds": 0.35,
+      "particle_cap": 24,
+      "low_effects_cap": 6,
+      "shape_backup": "directional_pull_line",
+      "color_note": "short line from target toward caster"
+    },
+    {
+      "id": "seer_hive_focus",
+      "bone": "right_hand",
+      "offset": [
+        0.0,
+        0.0,
+        -0.2
+      ],
+      "duration_seconds": 0.8,
+      "particle_cap": 16,
+      "low_effects_cap": 4,
+      "shape_backup": "target_link_icon",
+      "color_note": "subtle broken-line trail, not a wall-vision effect"
+    },
+    {
+      "id": "seer_hive_suspend",
+      "bone": "right_hand",
+      "offset": [
+        0.0,
+        0.0,
+        -0.2
+      ],
+      "duration_seconds": 0.25,
+      "particle_cap": 20,
+      "low_effects_cap": 5,
+      "shape_backup": "upward_ticks",
+      "color_note": "small upward fragments around an already validated target"
+    },
+    {
+      "id": "seer_hive_shatter",
+      "bone": "right_hand",
+      "offset": [
+        0.0,
+        0.0,
+        -0.2
+      ],
+      "duration_seconds": 0.35,
+      "particle_cap": 28,
+      "low_effects_cap": 7,
+      "shape_backup": "outward_segments",
+      "color_note": "original link fragments, never show-derived imagery"
+    },
+    {
+      "id": "scout_mind_anchor",
+      "bone": "left_hand",
+      "offset": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "duration_seconds": 0.75,
+      "particle_cap": 20,
+      "low_effects_cap": 5,
+      "shape_backup": "ground_circle_icon",
+      "color_note": "small original ground ring and route icon"
+    },
+    {
+      "id": "scout_route_point",
+      "bone": "right_hand",
+      "offset": [
+        0.0,
+        -1.1,
+        0.0
+      ],
+      "duration_seconds": 0.5,
+      "particle_cap": 12,
+      "low_effects_cap": 3,
+      "shape_backup": "ground_arrow_icon",
+      "color_note": "shape and HUD route summary do not rely on color"
+    },
+    {
+      "id": "guardian_brace",
+      "bone": "chest",
+      "offset": [
+        0.0,
+        0.45,
+        0.0
+      ],
+      "duration_seconds": 0.35,
+      "particle_cap": 12,
+      "low_effects_cap": 3,
+      "shape_backup": "short_guard_arc",
+      "color_note": "brief local guard arc with HUD status; no full-screen overlay"
+    },
+    {
+      "id": "scout_signal",
+      "bone": "right_hand",
+      "offset": [
+        0.0,
+        0.0,
+        -0.2
+      ],
+      "duration_seconds": 0.2,
+      "particle_cap": 18,
+      "low_effects_cap": 4,
+      "shape_backup": "marked_target_outline",
+      "color_note": "target outline and HUD feedback remain readable without color"
+    }
+  ],
+  "sound_cue_contract": [
+    {
+      "cue": "guardian_guard_signal",
+      "marker": "PLAY_SOUND",
+      "seconds": 0.28,
+      "volume": "medium",
+      "category": "plan",
+      "status": "future_original_cue"
+    },
+    {
+      "cue": "companion_melee_swing",
+      "marker": "APPLY_MELEE_DAMAGE",
+      "seconds": 0.42,
+      "volume": "low",
+      "category": "combat",
+      "status": "future_original_cue"
+    },
+    {
+      "cue": "gifted_focus_release",
+      "marker": "APPLY_POWER_EFFECT",
+      "seconds": 0.12,
+      "volume": "medium",
+      "category": "power",
+      "status": "future_original_cue"
+    },
+    {
+      "cue": "scout_route_marker",
+      "marker": "SPAWN_MARKER",
+      "seconds": 0.38,
+      "volume": "low",
+      "category": "route",
+      "status": "future_original_cue"
+    },
+    {
+      "cue": "hive_notice",
+      "marker": "PLAY_SOUND",
+      "seconds": 0.2,
+      "volume": "medium",
+      "category": "hive",
+      "status": "packaged_original"
+    },
+    {
+      "cue": "hive_release",
+      "marker": "PLAY_SOUND",
+      "seconds": 0.28,
+      "volume": "medium",
+      "category": "hive",
+      "status": "packaged_original"
+    },
+    {
+      "cue": "guardian_guard_signal",
+      "marker": "APPLY_POWER_EFFECT",
+      "seconds": 0.14,
+      "volume": "medium",
+      "category": "guardian_brace",
+      "status": "packaged_original"
+    },
+    {
+      "cue": "scout_route",
+      "marker": "SET_TARGET_VISUAL_STATE",
+      "seconds": 0.16,
+      "volume": "low",
+      "category": "scout_signal",
+      "status": "packaged_original"
+    }
+  ],
+  "global_limits": {
+    "max_particles_per_cast": 50,
+    "screen_shake_default": "off",
+    "camera_lock": false,
+    "input_lock": false,
+    "distant_companion_vfx_distance_blocks": 32,
+    "important_cue_requires_hud_or_chat_backup": true
+  }
+}

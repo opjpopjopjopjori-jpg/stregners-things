@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {"role":"guardian","formation_bias":"protective_center","priority_domains":["player_danger","ally_danger","exit","visible_threat"],"forbidden_actions":["loot_chase","reckless_entry","tnt_plan"],"dialogue_style":"short_practical"},
+    {"role":"seer","formation_bias":"rear_support","priority_domains":["tagged_danger","team_separation","memory_pattern","caution"],"forbidden_actions":["long_range_scout","reckless_melee","loot_chase"],"dialogue_style":"quiet_precise"},
+    {"role":"gifted","formation_bias":"protected_support","priority_domains":["rescue","safe_protection","energy_policy","ally_danger"],"forbidden_actions":["item_fuel","unsafe_push","block_damage"],"dialogue_style":"direct_bounded"},
+    {"role":"scout","formation_bias":"mobile_flank","priority_domains":["route","terrain","high_ground","formation_gap"],"forbidden_actions":["unloaded_scout","deep_water_scout","loot_chase"],"dialogue_style":"practical_brief"}
+  ]
+}

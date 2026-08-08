@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "id": "vanilla_creeper",
+      "entity_type": "minecraft:creeper",
+      "archetype": "EXPLOSIVE_THREAT",
+      "caution_bias": 12,
+      "observable_tell": "A visible creeper is close to a protected area.",
+      "counterplay": "Create distance and keep a clear retreat path."
+    },
+    {
+      "id": "vanilla_skeleton",
+      "entity_type": "minecraft:skeleton",
+      "archetype": "RANGED_THREAT",
+      "caution_bias": 8,
+      "observable_tell": "A visible ranged hostile has line-of-sight pressure.",
+      "counterplay": "Use cover and avoid standing in one line."
+    },
+    {
+      "id": "vanilla_stray",
+      "entity_type": "minecraft:stray",
+      "archetype": "RANGED_THREAT",
+      "caution_bias": 8,
+      "observable_tell": "A visible ranged hostile has line-of-sight pressure.",
+      "counterplay": "Use cover and avoid standing in one line."
+    },
+    {
+      "id": "vanilla_spider",
+      "entity_type": "minecraft:spider",
+      "archetype": "AMBUSHER",
+      "caution_bias": 6,
+      "observable_tell": "A visible climbing hostile can close distance from uneven terrain.",
+      "counterplay": "Keep open space and do not split the formation."
+    }
+  ]
+}

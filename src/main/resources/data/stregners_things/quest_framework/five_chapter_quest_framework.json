@@ -1,0 +1,85 @@
+{
+  "system_name": "Stregner Integrated Quest Story Framework (FTB Quest)",
+  "framework_version": "1.0.0",
+  "description": "Five-chapter sequential quest framework with prerequisite chains, character dialogue hooks, sequencing rules, and AI-generation markers. Designed so any AI, given this schema plus task definitions, can generate a complete coherent story with dialogue, prerequisites, and event progression without ambiguity.",
+  "language_policy": "English-only for source; AI may localize via this framework",
+  "chapters": [
+    {
+      "id": "chapter_01_gathering",
+      "title": "Chapter 1 — Gathering",
+      "sequence": 1,
+      "prerequisite_chapters": [],
+      "required_before_next": ["collect_food", "discover_nearby_village"],
+      "tasks": [
+        {"id":"collect_food","label":"Gather food resources","type":"item_collection"},
+        {"id":"scout_area","label":"Scout surrounding area","type":"exploration"}
+      ],
+      "characters_involved": ["Seer","Guardian"],
+      "dialogue_hook": "Seer uses Hive Sense to detect safe resources; Guardian proposes a defense plan using arrows and concealment before moving.",
+      "event_trigger": "On food collection complete, Seer reveals a nearby village if one exists within bounded range; else team must travel a set distance."
+    },
+    {
+      "id": "chapter_02_discovery",
+      "title": "Chapter 2 — Discovery",
+      "sequence": 2,
+      "prerequisite_chapters": ["chapter_01_gathering"],
+      "required_before_next": ["find_village","search_for_structure"],
+      "tasks": [
+        {"id":"find_village","label":"Locate nearby village or structure","type":"location_discovery"},
+        {"id":"search_for_structure","label":"Search for biom structure (biome/pyramid)","type":"search"}
+      ],
+      "characters_involved": ["Seer","Scout"],
+      "dialogue_hook": "Seer discovers the village using her power; if no village exists, Scout is asked to search again with a specified target (biome / pyramid / structure).",
+      "event_trigger": "On village discovery, Seer says: 'Follow me — I will lead you to the nearest settlement.'"
+    },
+    {
+      "id": "chapter_03_combat",
+      "title": "Chapter 3 — Combat",
+      "sequence": 3,
+      "prerequisite_chapters": ["chapter_02_discovery"],
+      "required_before_next": ["kill_10_zombies","plan_strategy"],
+      "tasks": [
+        {"id":"kill_10_zombies","label":"Defeat 10 zombies","type":"combat"},
+        {"id":"plan_strategy","label":"Agree on arrow and concealment strategy","type":"tactical_decision"}
+      ],
+      "characters_involved": ["Guardian","Seer","Gifted"],
+      "dialogue_hook": "Team discusses tactics: arrows plus hiding; Guardian proposes defensive positions; Gifted offers Shield if protected-boundary checks pass.",
+      "event_trigger": "After combat, Guardian writes a brief factual after-action review."
+    },
+    {
+      "id": "chapter_04_armor_collection",
+      "title": "Chapter 4 — Armor Collection",
+      "sequence": 4,
+      "prerequisite_chapters": ["chapter_03_combat"],
+      "required_before_next": ["collect_armor","collect_more_food"],
+      "tasks": [
+        {"id":"collect_armor","label":"Gather armor pieces","type":"item_collection"},
+        {"id":"collect_more_food","label":"Gather additional food","type":"item_collection"}
+      ],
+      "characters_involved": ["Scout","Seer"],
+      "dialogue_hook": "Scout notes safe routes; Seer checks for nearby threats before collecting. Dialogue must reference previous combat plan.",
+      "event_trigger": "On collection complete, team can proceed to final chapter."
+    },
+    {
+      "id": "chapter_05_conclusion",
+      "title": "Chapter 5 — Conclusion",
+      "sequence": 5,
+      "prerequisite_chapters": ["chapter_04_armor_collection"],
+      "required_before_next": [],
+      "tasks": [
+        {"id":"final_dialogue","label":"Full team dialogue and story resolution","type":"narrative_resolution"},
+        {"id":"complete_story_command","label":"Activate complete 5-chapter story via command","type":"command_trigger"}
+      ],
+      "characters_involved": ["Seer","Guardian","Scout","Gifted"],
+      "dialogue_hook": "Complete sequential story activation: user presses the command button; the framework unfolds all 5 chapters in order with full dialogue, prerequisites checked, and events sequenced.",
+      "event_trigger": "Story completes; AI generates coherent narrative linking all chapters using this schema."
+    }
+  ],
+  "sequencing_rules": {
+    "must_complete_in_order": true,
+    "prerequisite_check": "Before any chapter activates, all tasks in prerequisite_chapters must be completed.",
+    "dialogue_chain": "Each chapter's dialogue references previous chapter outcomes.",
+    "character_roles_fixed": true
+  },
+  "ai_generation_guidance": "Given this JSON framework plus the task list, generate: (1) full English dialogue for each chapter matching character roles; (2) prerequisite checks; (3) sequential event descriptions; (4) tactical discussions (e.g., arrow/concealment plans for zombies); (5) discovery events (village search, distance travel if no village); (6) a command that activates the complete 5-chapter story from start to finish in sequence. Every element must reference this schema so the AI produces a coherent, precise, detailed story without ambiguity."
+}

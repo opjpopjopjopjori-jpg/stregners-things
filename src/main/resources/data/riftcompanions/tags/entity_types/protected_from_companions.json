@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:villager",
+    "minecraft:iron_golem",
+    "minecraft:wolf",
+    "minecraft:cat",
+    "minecraft:allay"
+  ]
+}

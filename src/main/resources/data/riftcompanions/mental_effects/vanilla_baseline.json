@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {"effect": "minecraft:confusion", "priority": 70},
+    {"effect": "minecraft:darkness", "priority": 60}
+  ]
+}

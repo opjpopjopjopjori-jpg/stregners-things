@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "content_scope": "public_original_presentation",
+  "display_profiles": {
+    "seer": { "display_name": "Seer", "texture": "textures/entity/public/seer_public.png" },
+    "guardian": { "display_name": "Guardian", "texture": "textures/entity/public/guardian_public.png" },
+    "gifted": { "display_name": "Gifted", "texture": "textures/entity/public/gifted_public.png" },
+    "scout": { "display_name": "Scout", "texture": "textures/entity/public/scout_public.png" }
+  },
+  "note": "Public mode uses original generic presentation assets and names while preserving neutral gameplay roles."
+}

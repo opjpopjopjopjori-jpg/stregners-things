@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {"item": "minecraft:totem_of_undying", "category": "RARE_OR_PROTECTED"},
+    {"item": "minecraft:enchanted_golden_apple", "category": "RARE_OR_PROTECTED"},
+    {"item": "minecraft:nether_star", "category": "RARE_OR_PROTECTED"},
+    {"item": "minecraft:dragon_egg", "category": "RARE_OR_PROTECTED"},
+    {"item": "minecraft:diamond", "category": "RARE_OR_PROTECTED"},
+    {"item": "minecraft:netherite_ingot", "category": "RARE_OR_PROTECTED"},
+    {"item": "minecraft:potion", "category": "HEALING"},
+    {"item": "minecraft:splash_potion", "category": "HEALING"},
+    {"item": "minecraft:lingering_potion", "category": "HEALING"},
+    {"item": "minecraft:arrow", "category": "PERSONAL_AMMO"},
+    {"item": "minecraft:spectral_arrow", "category": "PERSONAL_AMMO"}
+  ]
+}

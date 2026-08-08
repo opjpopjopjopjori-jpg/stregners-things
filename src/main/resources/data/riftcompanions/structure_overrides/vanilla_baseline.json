@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {"block": "minecraft:bell", "profile_id": "village", "caution_bias": 0},
+    {"block": "minecraft:spawner", "profile_id": "dungeon", "caution_bias": 8},
+    {"block": "minecraft:cobweb", "profile_id": "mineshaft", "caution_bias": 4},
+    {"block": "minecraft:end_portal_frame", "profile_id": "stronghold", "caution_bias": 12},
+    {"block": "minecraft:crying_obsidian", "profile_id": "ruined_portal", "caution_bias": 4}
+  ]
+}

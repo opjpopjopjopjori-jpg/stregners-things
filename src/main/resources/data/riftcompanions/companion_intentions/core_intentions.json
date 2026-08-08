@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "id": "guardian_guard_post",
+      "role": "guardian",
+      "context": "A quiet HOME or REST anchor is established and the team has no active emergency.",
+      "optional_action": "Hopper would like a Guard Post before the next risky trip.",
+      "completion_key": "ANCHOR_GUARD_POST",
+      "reward_summary": "The team recorded a Guard Post intention as a clear defensive reference, not a damage bonus.",
+      "dialogue_trigger": "intention_offer"
+    },
+    {
+      "id": "seer_compare_markers",
+      "role": "seer",
+      "context": "The team has a safe base and can compare only player-visible annotations.",
+      "optional_action": "Will would like to compare two observed markers before moving closer.",
+      "completion_key": "ANNOTATION_INVESTIGATE",
+      "reward_summary": "Will's comparison became a journal note; it did not reveal unseen chunks or structures.",
+      "dialogue_trigger": "intention_offer"
+    },
+    {
+      "id": "gifted_shield_entry",
+      "role": "gifted",
+      "context": "A quiet base offers space to discuss protection before danger, not during it.",
+      "optional_action": "Eleven would like to test whether a Shield helps at a narrow, player-chosen entry.",
+      "completion_key": "POWER_GIFTED_SHIELD",
+      "reward_summary": "The team recorded a protective Shield lesson without granting a new destructive power.",
+      "dialogue_trigger": "intention_offer"
+    },
+    {
+      "id": "scout_high_route",
+      "role": "scout",
+      "context": "A safe anchor exists and a route can be marked without loading unexplored chunks.",
+      "optional_action": "Max would like to test a higher route and leave a clear return marker.",
+      "completion_key": "ANNOTATION_SAFE_ROUTE",
+      "reward_summary": "Max's route test became a clearer return marker, not a permanent speed bonus.",
+      "dialogue_trigger": "intention_offer"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "framework": "StregnerFiveChapter",
+  "ftb_quests_version": "1.20.1",
+  "chapters": 5,
+  "tasks_per_chapter": ["CH01:2","CH02:2","CH03:2","CH04:2","CH05:1"],
+  "dependencies_enforced": true,
+  "ai_directive_available": true,
+  "dialogue_hook_active": true,
+  "command_trigger": "/stregners story activate",
+  "ai_generation_contract": "Given SNBT + Java framework + task mapper, AI produces complete 5-chapter story with prerequisites, dialogue, events, and resolution.",
+  "characters_by_chapter": {
+    "CH01": ["Seer","Guardian"],
+    "CH02": ["Seer","Scout"],
+    "CH03": ["Guardian","Seer","Gifted"],
+    "CH04": ["Scout","Seer"],
+    "CH05": ["Seer","Guardian","Scout","Gifted"]
+  }
+}
