@@ -32,9 +32,8 @@ See [`NO_BUILD_FILES.md`](NO_BUILD_FILES.md), [`docs/BUILD_HANDOFF.md`](docs/BUI
 - No custom hostile entities, enemy textures, hostile worldgen, or monster-spawn system are registered. Companions interact with the normal Minecraft hostile world instead.
 - Five original synthesized Hive OGG cue assets plus a registered original companion, UI, and ambience cue library for confirmed presentation events; no actor voices or show music.
 - UV guide: [`docs/TEXTURE_UV_LAYOUT.md`](docs/TEXTURE_UV_LAYOUT.md)
-- Asset previews:
-  - [`docs/faceted_character_texture_preview.png`](docs/faceted_character_texture_preview.png)
-  - [`docs/faceted_character_model_preview.png`](docs/faceted_character_model_preview.png) — source review, not an in-game render
+- Model source preview: [`docs/faceted_character_model_preview.png`](docs/faceted_character_model_preview.png) — source review, not an in-game render
+- Character texture atlases are intentionally not bundled; supply replacement textures before using the companion renderer in-game.
 
 ### Core team systems
 
